@@ -1,13 +1,10 @@
 package bdd.stepdefs;
 
 import bdd.SpringBootCucumberTest;
-import com.comit.model.Order;
 import com.comit.model.OrderForm;
 import com.comit.model.Product;
 import com.comit.model.User;
-import com.comit.repository.OrderProductRepository;
 import com.comit.repository.OrderRepository;
-import com.comit.repository.ProductRepository;
 import com.comit.repository.UserRepository;
 import com.comit.service.ProductService;
 import io.cucumber.java.en.Given;
@@ -22,12 +19,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 @SpringBootCucumberTest

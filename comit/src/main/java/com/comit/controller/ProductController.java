@@ -2,9 +2,7 @@ package com.comit.controller;
 
 import com.comit.model.Product;
 import com.comit.service.ProductService;
-import jdk.dynalink.linker.LinkerServices;
 import org.springframework.data.domain.Page;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

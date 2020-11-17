@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint;
-
 //@SpringBootCucumberTest
 //@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 public class RegisterStepDefs {

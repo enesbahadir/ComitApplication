@@ -1,7 +1,6 @@
 package com.comit.service;
 
 import com.comit.execption.OrderNorFoundException;
-import com.comit.execption.ProductNotFoundException;
 import com.comit.model.Order;
 import com.comit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package com.comit.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class OrderForm {
