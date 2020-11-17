@@ -26,4 +26,10 @@ public class RegisterController {
     {
         return userService.getUserById(id);
     }
+
+    @GetMapping("/users/username")
+    public boolean isUsernameExist(@RequestParam("username") String username)
+    {
+        return userService.getUserByUserName(username) == null;
+    }
 }
