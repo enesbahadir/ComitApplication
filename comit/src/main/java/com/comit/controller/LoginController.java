@@ -17,7 +17,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody LoginForm user) {
-        User findUser = userService.getUserByUserName(user.getUserName());
+        User findUser = userService.getUserByUserName(user.getUsername());
         return findUser != null && findUser.getPassword().equals(user.getPassword());
     }
 }

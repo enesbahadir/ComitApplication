@@ -1,10 +1,9 @@
 package com.comit.controller;
 
 import com.comit.model.User;
+import com.comit.model.UserForm;
 import com.comit.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RegisterController {
@@ -16,11 +15,15 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public User createUser(@RequestBody User newUser)
+    public User createUser(@RequestBody UserForm userForm)
     {
-        return userService.createUser(newUser);
-                /*EntityModel.of(newUser,
-                linkTo(methodOn(RegisterController.class).getPreschoolById(newPreschool.getId())).withSelfRel(),
-                linkTo(methodOn(RegisterController.class).listOfPreschools()).withRel("preschools"));*/
+        return userService.createUser(userForm);
+
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable Integer id)
+    {
+        return userService.getUserById(id);
     }
 }
