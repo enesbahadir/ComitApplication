@@ -1,6 +1,8 @@
 package com.comit.service;
 
+import com.comit.execption.UserNotFoundException;
 import com.comit.model.User;
+import com.comit.model.UserForm;
 import com.comit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User model)
+    public User createUser(UserForm model)
     {
         User newUser = new User(model.getUsername(),model.getPassword(),
                 model.getName(), model.getSurName(), model.getType());
@@ -23,7 +25,12 @@ public class UserService {
         return newUser;
     }
 
-    public User getUserByUserName(String userName) {
-        return userRepository.findByUsername(userName);
+    public User getUserByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public User getUserById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 }
