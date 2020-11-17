@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let product of products">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img [src]="product.file" alt="Resim yok" width="50">
+
+                    </div>
+                    <div class="product_details">
+                        <h5><a href=""> {{product.name}}</a></h5>
+                        <h5><a href=""> {{product.description}}</a></h5>
+
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">{{product.price}} TL</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="separator clear-left">
+                    <p class="btn-add">
+                        <i class="fa fa-shopping-cart"></i><a class="hidden-sm" (click)="addProductChart(product)">Add to cart</a></p>
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
