@@ -9,6 +9,7 @@ const usersModule = () => import('./users/users.module').then(x => x.UsersModule
 const productsModule = () => import('./products/products.module').then(x => x.ProductsModule);
 const shopModule = () => import('./shop/shop.module').then(x => x.ShopModule);
 const chartModule = () => import('./chart/chart.module').then(x => x.ChartModule);
+const orderModule = () => import('./order/order.module').then(x => x.OrderModule);
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'products', loadChildren: productsModule },
     { path: 'shop', loadChildren: shopModule},
     { path: 'chart',loadChildren: chartModule},
+    { path: 'order', loadChildren: orderModule},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
