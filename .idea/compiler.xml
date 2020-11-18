@@ -2,9 +2,9 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for comit" enabled="true">
-        <sourceOutputDir name="../Yeni klasör/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../Yeni klasör/target/generated-test-sources/test-annotations" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="comit" />
       </profile>

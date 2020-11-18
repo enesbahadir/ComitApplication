@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ComitApplication.iml" filepath="$PROJECT_DIR$/.idea/ComitApplication.iml" />
-      <module fileurl="file://$PROJECT_DIR$/server/comit.iml" filepath="$PROJECT_DIR$/server/comit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comit/comit.iml" filepath="$PROJECT_DIR$/comit/comit.iml" />
     </modules>
   </component>
 </project>
