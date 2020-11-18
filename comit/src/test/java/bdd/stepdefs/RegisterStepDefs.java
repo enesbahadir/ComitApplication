@@ -3,6 +3,7 @@ package bdd.stepdefs;
 import bdd.SpringBootCucumberTest;
 import com.comit.model.User;
 import com.comit.model.UserForm;
+import com.comit.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,18 +16,26 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootCucumberTest
-@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
+//@SpringBootCucumberTest
+//@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 public class RegisterStepDefs {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MockMvc mvc;
 
     ResultActions action;
 
+    long databaseSizeBeforeCreate;
+
     @Given("^comit app register page$")
     public void comitAppRegisterPage() throws Throwable {
+
+        databaseSizeBeforeCreate = userRepository.count();
     }
 
     @When("^the user fill register form, User object is posted$")
@@ -45,6 +54,7 @@ public class RegisterStepDefs {
     @Then("^Registration process should be successful$")
     public void registrationProcessShouldBeSuccessful() throws Throwable {
         action.andExpect(status().is(200));
+        assertThat(userRepository.count()).isEqualTo(databaseSizeBeforeCreate+1);
     }
 
     public static String asJsonString(final Object obj) {

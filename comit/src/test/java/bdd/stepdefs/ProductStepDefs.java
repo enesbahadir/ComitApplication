@@ -1,5 +1,6 @@
 package bdd.stepdefs;
 
+import bdd.SpringBootCucumberTest;
 import com.comit.model.Product;
 import com.comit.repository.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,11 +9,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -30,6 +34,7 @@ public class ProductStepDefs {
 
     ResultActions action;
     private final Product product = new Product("mockProduct","New Mock Description", 100L, null);
+    long databaseSizeBeforeCreate;
 
     public void addNewMockProduct ()
     {
@@ -41,6 +46,7 @@ public class ProductStepDefs {
     //Admin type user should add new prodcut
     @Given("comit app prodcut add form page")
     public void comitAppProdcutAddFormPage() throws Throwable {
+        databaseSizeBeforeCreate = productRepository.count();
     }
 
     @When("user fill product add form, new product is posted")
@@ -55,6 +61,7 @@ public class ProductStepDefs {
     @Then("adding process should be successful")
     public void addingProcessShouldBeSuccessful() throws Throwable {
         action.andExpect(status().is(200));
+        assertThat(productRepository.count()).isEqualTo(databaseSizeBeforeCreate+1);
     }
 
     public static String asJsonString(final Object obj) {
@@ -72,6 +79,7 @@ public class ProductStepDefs {
     @Given("comit app prodcut edit form page")
     public void comitAppProdcutEditFormPage() throws Throwable{
         addNewMockProduct();
+        databaseSizeBeforeCreate = productRepository.count();
     }
 
     @When("user fill product edit form, edited product is posted")
@@ -89,6 +97,7 @@ public class ProductStepDefs {
     @Then("editing process should be successful")
     public void editingProcessShouldBeSuccessful() throws Throwable{
         action.andExpect(status().is(200));
+        assertThat(productRepository.count()).isEqualTo(databaseSizeBeforeCreate);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +106,7 @@ public class ProductStepDefs {
     @Given("comit app product delete page")
     public void comitAppProductDeletePage() throws Throwable{
         addNewMockProduct();
+        databaseSizeBeforeCreate = productRepository.count();
     }
 
     @When("user push delete button")
@@ -111,6 +121,7 @@ public class ProductStepDefs {
     @Then("delete process should be successful")
     public void deleteProcessShouldBeSuccessful() throws Throwable{
         action.andExpect(status().is(200));
+        assertThat(productRepository.count()).isEqualTo(databaseSizeBeforeCreate-1);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,14 +129,21 @@ public class ProductStepDefs {
     //All users should see product list
 
     @Given("comit app shop page")
-    public void comitAppShopPage() {
+    public void comitAppShopPage() throws Throwable{
+        addNewMockProduct();
     }
 
     @When("user should see all products")
-    public void userShouldSeeAllProducts() {
+    public void userShouldSeeAllProducts() throws Throwable {
+        action = mvc.perform(MockMvcRequestBuilders
+                .get("/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Then("listing process should be successfull")
-    public void listingProcessShouldBeSuccessfull() {
+    public void listingProcessShouldBeSuccessfull() throws Throwable {
+        action.andExpect(status().is(200));
     }
 }
