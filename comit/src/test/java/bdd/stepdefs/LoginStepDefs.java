@@ -1,5 +1,6 @@
 package bdd.stepdefs;
 
+import bdd.SpringBootCucumberTest;
 import com.comit.model.LoginForm;
 import com.comit.model.User;
 import com.comit.repository.UserRepository;
@@ -11,6 +12,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -95,7 +98,6 @@ public class LoginStepDefs {
 
     @Then("login process should be unsuccessful")
     public void loginProcessShouldBeUnsuccessful() throws Throwable{
-        //action.andExpect(status().is(400));
         MvcResult result = action.andReturn();
         String login = result.getResponse().getContentAsString();
         Assert.assertEquals("false", login);

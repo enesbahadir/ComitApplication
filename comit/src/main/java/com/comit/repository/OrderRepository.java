@@ -11,4 +11,6 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Query("SELECT o FROM Order o WHERE o.user.id = ?1")
     List<Order> getOrdersByUserId(int id);
 
+    long count();
+
 }

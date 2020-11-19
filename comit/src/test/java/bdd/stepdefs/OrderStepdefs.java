@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 @SpringBootCucumberTest
@@ -42,6 +43,7 @@ public class OrderStepdefs {
 
     private final OrderForm orderFrom = new OrderForm();
     ResultActions action;
+    long databaseSizeBeforeCreate;
 
     public OrderStepdefs() {
     }
@@ -56,6 +58,7 @@ public class OrderStepdefs {
         addMockProduct();
         addMockUser();
         orderFrom.setLocalDate("2020/11/11");
+        databaseSizeBeforeCreate = orderRepository.count();
     }
 
     @When("user select products and push Complete Order button")
@@ -72,6 +75,7 @@ public class OrderStepdefs {
     @Given("An order is successfully added")
     public void anOrderIsSuccessfullyAdded() throws Throwable {
         action.andExpect(status().is(200));
+        assertThat(orderRepository.count()).isEqualTo(databaseSizeBeforeCreate+1);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
