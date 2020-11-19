@@ -1,4 +1,7 @@
-package com.comit.model;
+package com.comit.payload;
+
+import com.comit.model.Product;
+import com.comit.model.User;
 
 import java.util.List;
 
