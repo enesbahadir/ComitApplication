@@ -1,0 +1,32 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark" *ngIf="user">
+    <div><a class="navbar-brand">Comit</a></div>
+
+
+    <ul class="navbar-nav">
+      <li><a  class="nav-link" routerLink="/products" routerLinkActive="active" >Admin</a></li>
+      <li><a  class="nav-link" routerLink="/shop" routerLinkActive="active">Shop</a></li>
+      <li><a  class="nav-link" routerLink="/chart" routerLinkActive="active">Chart</a></li>
+      <li><a  class="nav-link" routerLink="/order" routerLinkActive="active" >Order</a></li>
+
+    </ul>
+
+<ul class="navbar-nav" id="icon">
+  <li class="nav-item" >
+    <a class="nav-link" routerLink="account/login" routerLinkActive="active">
+
+
+
+    </a>
+  </li>
+  <li class="nav-item" >
+    <a class="nav-link" routerLink="/shop" routerLinkActive="active">
+
+
+    </a>
+  </li>
+</ul>
+
+
+  </nav>
+</header>

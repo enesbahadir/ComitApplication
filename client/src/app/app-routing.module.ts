@@ -18,11 +18,11 @@ const orderModule = () => import('./order/order.module').then(x => x.OrderModule
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'account', loadChildren: accountModule },
-    { path: 'products', loadChildren: productsModule },
-    { path: 'shop', loadChildren: shopModule},
-    { path: 'chart',loadChildren: chartModule},
-    { path: 'order', loadChildren: orderModule},
+    { path: 'account', loadChildren: accountModule,  canActivate: [AuthGuard] },
+    { path: 'products', loadChildren: productsModule,  canActivate: [AuthGuard] },
+    { path: 'shop', loadChildren: shopModule,  canActivate: [AuthGuard]},
+    { path: 'chart',loadChildren: chartModule, canActivate: [AuthGuard]},
+    { path: 'order', loadChildren: orderModule,  canActivate: [AuthGuard]},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
