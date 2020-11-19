@@ -1,5 +1,7 @@
 package com.comit;
 
+import com.comit.model.ERole;
+import com.comit.model.Role;
 import com.comit.model.User;
 import com.comit.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +12,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Collections;
+import java.util.HashSet;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,14 +37,16 @@ public class RegisterIntegrationTest {
 
     @Test
     public void shouldPostMethodReturnOkAndCreateNewUser() throws Exception {
-        User user = new User("Zaphod", "zaphod@galaxy.net","eheheh","eheheh","USER");
+        User user = new User("Zaphod", "zaphod@galaxy.net","eheheh","eheheh",
+                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
 
         mockMvc.perform(post("/register")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
 
-        User userEntity = userRepository.findByUsername("Zaphod");
+        User userEntity = userRepository.findByUsername("Zaphod").orElse(null);
+        assert userEntity != null;
         assertThat(userEntity.getPassword()).isEqualTo("zaphod@galaxy.net");
     }
 

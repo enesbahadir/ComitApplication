@@ -1,8 +1,7 @@
 package bdd.stepdefs;
 
 import bdd.SpringBootCucumberTest;
-import com.comit.model.User;
-import com.comit.model.UserForm;
+import com.comit.payload.UserForm;
 import com.comit.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
@@ -15,11 +14,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Collections;
+import java.util.HashSet;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@SpringBootCucumberTest
-//@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
+@SpringBootCucumberTest
+@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 public class RegisterStepDefs {
 
     @Autowired
@@ -40,11 +43,12 @@ public class RegisterStepDefs {
 
     @When("^the user fill register form, User object is posted$")
     public void theUserFillRegisterFormUserObjectIsPosted() throws Throwable {
-        UserForm userForm = new UserForm("Zaphoder32", "zaphod@galaxynet","eheheh","eheheh","USER");
+        UserForm userForm = new UserForm("Zaphoder32", "zaphod@galaxynet","eheheh","eheheh",
+                new HashSet<>(Collections.singletonList("USER")));
         //String requestBody = "{ \"username\":\"enes, \"password\": \"password\",\"name\": \"enes\",\"surName\": \"enes\",\"type\":\"USER\"}";
 
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/register")
+                .post("/api/auth/signup")
                 .content(asJsonString(userForm))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));

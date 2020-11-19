@@ -1,6 +1,8 @@
 package com.comit;
 
-import com.comit.model.LoginForm;
+import com.comit.model.ERole;
+import com.comit.payload.LoginForm;
+import com.comit.model.Role;
 import com.comit.model.User;
 import com.comit.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Collections;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,7 +39,8 @@ public class LoginIntegrationTest {
     @Test
     public void shouldLoginProcessBeSuccessfull() throws Exception {
         LoginForm loginForm = new LoginForm("Zaphod","aphod@galaxy.net");
-        User user = new User("Zaphod", "zaphod@galaxy.net","eheheh","eheheh","USER");
+        User user = new User("Zaphod", "zaphod@galaxy.net","eheheh","eheheh",
+                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
         userRepository.save(user);
 
         mockMvc.perform(post("/login")

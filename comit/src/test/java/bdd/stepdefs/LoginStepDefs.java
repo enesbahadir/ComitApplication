@@ -1,8 +1,11 @@
 package bdd.stepdefs;
 
 import bdd.SpringBootCucumberTest;
-import com.comit.model.LoginForm;
-import com.comit.model.User;
+import com.comit.model.ERole;
+import com.comit.model.Role;
+import com.comit.payload.LoginForm;
+import com.comit.payload.UserForm;
+import com.comit.repository.RoleRepository;
 import com.comit.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.datatable.DataTable;
@@ -19,6 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,15 +38,23 @@ public class LoginStepDefs {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     ResultActions action;
 
     LoginForm loginForm;
 
     @Before
-    public void addMockUserToUserRepository()
+    public void addMockUserToUserRepository() throws Throwable
     {
-        User user = new User("Zaphod", "zaphod@galaxy.net","eheheh","eheheh","USER");
-        if(userRepository.findByUsername("Zaphod") == null) userRepository.save(user);
+        UserForm userForm = new UserForm("Zaphoder32", "zaphod@galaxynet","eheheh","eheheh",
+                new HashSet<>(Collections.singletonList("USER")));
+        action = mvc.perform(MockMvcRequestBuilders
+                .post("/api/auth/signup")
+                .content(asJsonString(userForm))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
     }
 
     /**
@@ -56,7 +70,7 @@ public class LoginStepDefs {
     @When("the user fill login form")
     public void theUserFillLoginForm() throws Throwable {
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/login")
+                .post("/api/auth/signin")
                 .content(asJsonString(loginForm))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -81,7 +95,7 @@ public class LoginStepDefs {
      */
 
     @Given("comit app login page, valid user with a valid username and wrong password")
-    public void comitAppLoginPageValidUserWithAValidUsernameAndWrongPassword(DataTable table) {
+    public void comitAppLoginPageValidUserWithAValidUsernameAndWrongPassword(DataTable table) throws Throwable {
         addMockUserToUserRepository();
         List<String> data = table.row(1);
         loginForm = new LoginForm(data.get(0), data.get(1) );
@@ -90,7 +104,7 @@ public class LoginStepDefs {
     @When("the user fill login form with this user")
     public void theUserFillLoginFormWithThisUser() throws Throwable{
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/login")
+                .post("/api/auth/signin")
                 .content(asJsonString(loginForm))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -118,7 +132,7 @@ public class LoginStepDefs {
     @When("the user fill login form with this wrong username and valid password")
     public void theUserFillLoginFormWithThisWrongUsernameAndValidPassword() throws Throwable{
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/login")
+                .post("/api/auth/signin")
                 .content(asJsonString(loginForm))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
