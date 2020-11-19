@@ -1,7 +1,7 @@
 package com.comit.controller;
 
 import com.comit.model.Order;
-import com.comit.model.OrderForm;
+import com.comit.payload.OrderForm;
 import com.comit.model.OrderProduct;
 import com.comit.service.OrderProductService;
 import com.comit.service.OrderService;

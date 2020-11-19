@@ -1,6 +1,6 @@
 package com.comit.controller;
 
-import com.comit.model.LoginForm;
+import com.comit.payload.LoginForm;
 import com.comit.model.User;
 import com.comit.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/auth/login")
     public boolean login(@RequestBody LoginForm user) {
         User findUser = userService.getUserByUserName(user.getUsername());
         return findUser != null && findUser.getPassword().equals(user.getPassword());
