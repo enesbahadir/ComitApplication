@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -74,9 +75,7 @@
             "styles": [
               "styles.css"
             ],
-            "scripts": [
-
-            ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
