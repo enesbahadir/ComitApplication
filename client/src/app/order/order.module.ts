@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OrderComponent} from "../order/order.component";
+import { OrderComponent} from "./order.component";
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [

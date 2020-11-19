@@ -8,20 +8,11 @@ import {Product} from "../_models/product";
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  products : Product[];
-  constructor(private  chartService: ChartService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.products = this.chartService.products;
 
-    this.getTotalPrice();
   }
-  getTotalPrice() {
-    let total = 0;
 
-    this.products.map(item => {
-      total += item.price;
-    });
-    return total
-  }
 }
