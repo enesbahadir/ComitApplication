@@ -1,7 +1,8 @@
-package com.comit.model;
+package com.comit.payload;
+
+import java.util.Set;
 
 public class UserForm {
-
     public String getUsername() {
         return username;
     }
@@ -34,23 +35,23 @@ public class UserForm {
         this.surName = surName;
     }
 
-    public String getType() {
-        return type;
+    public Set<String> getRole() {
+        return role;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(Set<String> role) {
+        this.role = role;
     }
 
     public UserForm() {
     }
 
-    public UserForm(String username, String password, String name, String surName, String type) {
+    public UserForm(String username, String password, String name, String surName, Set<String> role) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surName = surName;
-        this.type = type;
+        this.role = role;
     }
 
     private String username;
@@ -61,5 +62,5 @@ public class UserForm {
 
     private String surName;
 
-    private String type;
+    private Set<String> role;
 }

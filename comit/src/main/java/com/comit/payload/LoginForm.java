@@ -1,4 +1,4 @@
-package com.comit.model;
+package com.comit.payload;
 
 public class LoginForm {
     private String username;
