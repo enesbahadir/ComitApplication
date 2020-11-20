@@ -87,6 +87,12 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>5.4.1</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+			<version>8.0.22</version>
+		</dependency>
     </dependencies>
 
 	<build>
