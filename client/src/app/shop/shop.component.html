@@ -1,34 +1,29 @@
 <br>
 <div class="container">
-    <div class="row clearfix">
-        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of products">
-            <div class="card product_item">
-                <div class="body">
-                    <div class="cp_img">
-                        <img [src]="product.file" alt="Resim yok" width="220px" height="200px">
 
-                    </div>
-                    <div class="product_details">
-                        <h3><a href=""> {{product.name}}</a></h3>
-                        <h4><a href=""> {{product.description}}</a></h4>
-
-                        <ul class="product_price list-unstyled">
-                            <li style="color: red;font-size: medium" class="old_price">{{product.price}} TL</li>
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="separator clear-center">
-
-
-
-                     <a style="color: blue;float: right" class="hidden-sm" (click)="addProductChart(product)"> <span class="material-icons">
-add_shopping_cart
-</span></a>
-
-                </div>
+  <div class="row" style="text-align: center" >
+    <div class="col-xs-6" *ngFor="let product of products">
+      <div class="card">
+        <div>
+          <img class="rounded mx-auto d-block img-responsive mt-3" [src]="product.file" alt="Card image cap" height="120px" width="auto">
+        </div>
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold"></h6>
+          <div class="row">
+            <div class="col-sm-6">
+              <small> {{product.name}}</small>
+            </div>
+            <div class="col-sm-6">
+             <small>{{product.description}} </small>
+            </div>
+            <div class="col-sm-6">
+              <small>{{product.price}} </small>
             </div>
 
+          </div>
+          <button class="btn btn-sm btn-primary" (click)="addProductChart(product)">Add to Cart</button>
         </div>
-        </div>
+      </div>
+    </div>
+  </div>
     </div>

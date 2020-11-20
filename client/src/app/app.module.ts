@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import {BrowserAnimationModule} from '@angular/platform-browser/animations'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -14,7 +14,7 @@ import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { OrderComponent } from './order/order.component';
 import { MenuComponent } from './menu/menu.component';
-import {MatIconModule} from "@angular/material/icon";
+import { MatIconModule} from "@angular/material/icon";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 
 
@@ -27,7 +27,8 @@ import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
     MatIconModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule
 
   ],
     declarations: [

@@ -42,3 +42,12 @@ body{margin-top:20px;}
 .font-weight-semibold {
     font-weight: 600 !important;
 }
+input{ margin: 5px; }
+
+img{
+  height:120px;
+  width:auto
+}
+.col-md-4{
+  margin-bottom:20px;
+}
