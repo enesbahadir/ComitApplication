@@ -1,8 +1,11 @@
 package com.comit.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(	name = "users")
 public class User {
 
     @Id
@@ -18,22 +21,34 @@ public class User {
 
     private String surName;
 
-    private String type;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    public String getType() {
-        return type;
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public User(String username, String password, String name, String surName, String type) {
+    public User(String username, String password, String name, String surName) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surName = surName;
-        this.type = type;
+    }
+
+    public User(String username, String password, String name, String surName, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surName = surName;
+        this.roles = roles;
     }
 
     public int getId() {

@@ -1,9 +1,7 @@
 package bdd.stepdefs;
 
-import bdd.SpringBootCucumberTest;
-import com.comit.model.OrderForm;
-import com.comit.model.Product;
-import com.comit.model.User;
+import com.comit.model.*;
+import com.comit.payload.OrderForm;
 import com.comit.repository.OrderRepository;
 import com.comit.repository.UserRepository;
 import com.comit.service.ProductService;
@@ -11,8 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -20,13 +16,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
-@SpringBootCucumberTest
+//@AutoConfigureMockMvc(print = MockMvcPrint.NONE)
+//@SpringBootCucumberTest
 public class OrderStepdefs {
 
     @Autowired
@@ -162,14 +160,16 @@ public class OrderStepdefs {
     }
 
     public void addMockUser() {
-        User user = new User("enes","password","enes","enes","USER");
+        User user = new User("enes","password","enes","enes",
+                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
         user.setId(1);
         userRepository.save(user);
         orderFrom.setUser(user);
     }
 
     public void addMockUser2() {
-        User user = new User("bahadir","password","bahadir","bahadir","USER");
+        User user = new User("bahadir","password","bahadir","bahadir",
+                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
         user.setId(2);
         userRepository.save(user);
     }
