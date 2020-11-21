@@ -39,7 +39,7 @@ export class AddEditComponent implements OnInit {
         if (!this.isAddMode) {
             const product = this.productService.find(this.id);
             this.form.setValue({
-                // id: product.id,
+                id: product.id,
                 name: product.name,
                 description: product.description,
                 price: product.price,

@@ -38,8 +38,6 @@ products : Product[];
   }
 
 
-    addProductOrder(product: Product) {
-      this.orderService.addProduct(product);
-    }
+
 }
 
