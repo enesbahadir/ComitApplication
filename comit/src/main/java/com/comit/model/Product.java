@@ -20,7 +20,7 @@ public class Product {
 
     private Long price;
 
-    private byte[] picByte;
+    private String picUrl;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Product {
         this.id = id;
     }
 
-    public Product(String name, String description, Long price, byte[] picByte) {
+    public Product(String name, String description, Long price, String picUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.picByte = picByte;
+        this.picUrl = picUrl;
     }
 
     public String getName() {
@@ -61,11 +61,11 @@ public class Product {
         this.price = price;
     }
 
-    public byte[] getPicByte() {
-        return picByte;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setPicByte(byte[] picByte) {
-        this.picByte = picByte;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }
