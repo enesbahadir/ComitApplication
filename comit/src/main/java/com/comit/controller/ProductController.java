@@ -16,7 +16,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/products")
+    @PostMapping("/api/products")
     public Product createUser(@RequestBody Product newProduct)
     {
         return productService.createProduct(newProduct);
@@ -25,19 +25,19 @@ public class ProductController {
                 linkTo(methodOn(RegisterController.class).listOfPreschools()).withRel("preschools"));*/
     }
 
-    @PutMapping("/products/{id}")
+    @PutMapping("/api/products/{id}")
     public Product updateProduct (@RequestBody Product newProduct, @PathVariable Integer id)
     {
         return productService.updateProduct(newProduct, id);
 
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/api/products/{id}")
     void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("products")
+    @GetMapping("/api/products")
     public List<Product> getProducts()
     {
         return productService.getProducts();
@@ -49,14 +49,14 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @GetMapping("products/page")
+    @GetMapping("/api/products/page")
     @ResponseBody
     public List<Product> findAllPaginatedProducts(@RequestParam("pageNumber") int pageNumber) {
         Page<Product> resultPage = productService.getPaginatedProducts(pageNumber);
         return resultPage.getContent();
     }
 
-    @GetMapping("products/search")
+    @GetMapping("/api/products/search")
     public List<Product> findAllSearchedProducts(@RequestParam("search") String keyword) {
         return productService.getProdcuts(keyword);
     }
