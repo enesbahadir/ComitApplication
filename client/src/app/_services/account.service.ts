@@ -26,7 +26,8 @@ export class AccountService {
     }
 
     login(username, password) {
-        return this.http.post<User>(`http://localhost:8080/api/auth/signin`, { username, password })
+       // return this.http.post<User>(`http://localhost:8080/api/auth/signin`, { username, password })
+      return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -43,7 +44,8 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`http://localhost:8080/api/auth/signup`, user);
+        //return this.http.post(`http://localhost:8080/api/auth/signup`, user);
+      return this.http.post(`${environment.apiUrl}/users/register`, user);
     }
 
     getAll() {

@@ -15,9 +15,9 @@
                       <img [src]="product.file" alt="Resim yok" style="width: 100px;height: 150px"></a>
 
                     <div class="media-body pt-3">
-                        <h2 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#">Name: {{product.name}}</a></h2>
-                        <div class="font-size-md"><span class="text-muted mr-2">Descrption: {{product.description}}</span></div>
-                        <div class="font-size-lg text-primary pt-3" style="color: red"> Price: {{product.price}} Tl</div>
+                        <h2 class="product-card-title font-weight-semibold border-0 pb-0"><a>{{product.name}}</a></h2>
+                        <div class="font-size-md"><span class="text-muted mr-2">{{product.description}}</span></div>
+                        <div class="font-size-lg text-primary pt-3" style="color: forestgreen"> Price: {{product.price}}₺</div>
                     </div>
 
                 </div>
@@ -35,7 +35,7 @@
         <!-- Sidebar-->
         <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
             <h2 class="h6 px-4 py-3 bg-secondary text-center">Total</h2>
-            <div class="h3 font-weight-semibold text-center py-3">{{getTotalPrice()}} Tl</div>
+            <div class="h3 font-weight-semibold text-center py-3" style="color: coral">{{getTotalPrice()}}₺</div>
             <hr>
 
             <a class="btn btn-primary btn-block" routerLink="/order" routerLinkActive="active" >
