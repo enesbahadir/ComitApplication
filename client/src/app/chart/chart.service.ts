@@ -20,6 +20,7 @@ export class ChartService {
             this.products.splice(index, 1);
         }
     }
+
     findAll(): Product[] {
         return this.products.slice();
     }

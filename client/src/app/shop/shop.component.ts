@@ -30,6 +30,6 @@ export class ShopComponent implements OnInit {
   }
 
   addProductChart(product: Product) {
-this.chartService.addProduct(product);
+  this.chartService.addProduct(product);
   }
 }

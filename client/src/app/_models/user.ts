@@ -4,7 +4,8 @@ export interface User {
     username: string;
     password: string;
     name: string;
-    lastName: string;
+    surName: string;
     role : string[];
-    accessToken: string;
+    //accessToken: string;
+  token: string
 }

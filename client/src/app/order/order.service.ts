@@ -5,11 +5,6 @@ import {Product} from "../_models/product";
 export class OrderService {
 
 
-    constructor() {
-
-    }
-
-
-
+    constructor() { }
 
 }

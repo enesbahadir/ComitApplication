@@ -31,7 +31,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            }
         }
 
         // route functions
@@ -115,8 +115,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function basicDetails(user) {
-            const { id, username, firstName, lastName } = user;
-            return { id, username, firstName, lastName };
+            const { id, username, name, surName } = user;
+            return { id, username, name, surName };
         }
 
         function isLoggedIn() {

@@ -1,29 +1,69 @@
-<br>
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-xs-6" *ngFor="let product of products">-->
+<!--      <div class="card">-->
+<!--        <div>-->
+<!--          <img class="rounded mx-auto d-block img-responsive mt-3" [src]="product.file" alt="Card image cap"-->
+<!--               height="120px" width="auto">-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--          <h6 class="card-title font-weight-bold"></h6>-->
+<!--          <div class="row" style="text-align: center">-->
+<!--            <div class="col-sm-6">-->
+<!--              <small style="color: blue; text-align: center"> {{product.name}}</small>-->
+<!--            </div>-->
+<!--            <div class="col-sm-6">-->
+<!--              <small sstyle="margin-bottom: 10px">{{product.description}} </small>-->
+<!--            </div>-->
+<!--            <div class="col-sm-6">-->
+<!--              <small style="color: red">{{product.price}} Tl </small>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--          <button class="btn btn-sm btn-primary" (click)="addProductChart(product)">Add to Cart</button>-->
+<!--          &lt;!&ndash;          <mat-icon (click)="addProductChart(product)">shop</mat-icon>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
 <div class="container">
+  <div class="row">
+    <div *ngFor="let product of products">
+<!--      <mat-card class="mat-card-with">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title> {{product.name}} </mat-card-title>-->
+<!--          <mat-card-subtitle>{{product.description}}</mat-card-subtitle>-->
+<!--        </mat-card-header>-->
+<!--        <img matCardImage [src]="product.file" width="130" height="130" alt="Resim Bulunamadı">-->
+<!--        <mat-card-content>-->
+<!--          {{product.price}}₺-->
+<!--        </mat-card-content>-->
+<!--        <mat-card-actions align="start">-->
+<!--          <button mat-button (click)="addProductChart(product)">Add to Cart</button>-->
 
-  <div class="row" style="text-align: center" >
-    <div class="col-xs-6" *ngFor="let product of products">
-      <div class="card">
+<!--        </mat-card-actions>-->
+<!--        <mat-card-footer>-->
+<!--          Footer-->
+<!--        </mat-card-footer>-->
+<!--      </mat-card>-->
+      <div class="master-div">
         <div>
-          <img class="rounded mx-auto d-block img-responsive mt-3" [src]="product.file" alt="Card image cap" height="120px" width="auto">
+          <h3>{{product.name}} </h3>
+          <span class="dec-css">{{product.description}}</span>
         </div>
-        <div class="card-body">
-          <h6 class="card-title font-weight-bold"></h6>
-          <div class="row">
-            <div class="col-sm-6">
-              <small> {{product.name}}</small>
-            </div>
-            <div class="col-sm-6">
-             <small>{{product.description}} </small>
-            </div>
-            <div class="col-sm-6">
-              <small>{{product.price}} </small>
-            </div>
-
-          </div>
-          <button class="btn btn-sm btn-primary" (click)="addProductChart(product)">Add to Cart</button>
+        <div class="image-css">
+          <img [src]="product.file" alt="Resim bulunamadı..!" width="130" height="150">
+        </div>
+        <div class="pricing-css">
+          <span class="last-price">100₺</span>
+          <h2 style="color: forestgreen">{{product.price}}₺</h2>
+        </div>
+        <div class="button-css">
+          <button (click)="addProductChart(product)" mat-raised-button color="primary">Add Chart</button>
         </div>
       </div>
     </div>
   </div>
-    </div>
+</div>

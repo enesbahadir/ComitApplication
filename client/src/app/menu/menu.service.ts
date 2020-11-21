@@ -10,12 +10,5 @@ export class MenuService {
 
     }
 
-    addProduct(product: Product) {
-        this.products.push(product);
-    }
 
-
-    findAll(): Product[] {
-        return this.products.slice();
-    }
 }

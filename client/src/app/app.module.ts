@@ -16,6 +16,7 @@ import { OrderComponent } from './order/order.component';
 import { MenuComponent } from './menu/menu.component';
 import { MatIconModule} from "@angular/material/icon";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
