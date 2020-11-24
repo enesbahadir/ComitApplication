@@ -23,7 +23,7 @@ products : Product[];
 
   }
 
-  deleteChartProduct(id: string) {
+  deleteChartProduct(id: number) {
     this.chartService.deleteChartProduct(id);
     // refresh the list
     this.products = this.chartService.findAll();

@@ -23,7 +23,7 @@ public class ProductService {
 
     public Product createProduct (Product model)
     {
-        Product newProduct = new Product( model.getName(), model.getDescription(), model.getPrice(), model.getPicUrl());
+        Product newProduct = new Product( model.getName(), model.getDescription(), model.getPrice(), model.getPicByte());
         productRepository.save(newProduct);
         return newProduct;
     }
@@ -36,7 +36,7 @@ public class ProductService {
                     product.setName(newProduct.getName());
                     product.setPrice(newProduct.getPrice());
                     product.setDescription(newProduct.getDescription());
-                    product.setPicUrl(newProduct.getPicUrl());
+                    product.setPicByte(newProduct.getPicByte());
                     return productRepository.save(product);
                 })
                 .orElseGet(() -> {

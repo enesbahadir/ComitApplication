@@ -14,7 +14,7 @@ export class ChartService {
         this.products.push(product);
     }
 
-    deleteChartProduct(id: string) {
+    deleteChartProduct(id: number) {
         const index = this.products.findIndex(x => x.id === id);
         if (index !== -1) {
             this.products.splice(index, 1);

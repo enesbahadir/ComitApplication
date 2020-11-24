@@ -5,6 +5,8 @@ import { ListComponent} from "./list.component";
 import { RouterModule, Routes} from "@angular/router";
 import { AddEditComponent} from "./add-edit.component";
 
+import { HttpClientModule } from '@angular/common/http';
+
 const routes: Routes = [
     {
         path: '',
@@ -24,6 +26,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        HttpClientModule,
         RouterModule.forChild(routes)
     ],
     declarations: [
