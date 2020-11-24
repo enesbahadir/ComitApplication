@@ -29,8 +29,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.menuService.products;
-
+    this.products = this.chartService.findAll();
   }
 
   logout() {
@@ -39,7 +38,7 @@ export class MenuComponent implements OnInit {
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  deleteChartProduct(id: string) {
+  deleteChartProduct(id: number) {
     const index = this.products.findIndex(x => x.id === id);
     if (index !== -1) {
       this.products.splice(index, 1);
