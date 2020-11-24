@@ -15,6 +15,22 @@ export class ShopComponent implements OnInit {
   fileToUpload: any;
   imageUrl: any;
 
+  constructor(
+    private productService: ProductService,
+    private  chartService: ChartService,
+    private menuService: MenuService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.findAll();
+  }
+
+  addProductChart(product: Product) {
+    this.chartService.addToCart(product);
+    // this.menuService.addProduct(product);
+  }
+
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
     let reader = new FileReader();
@@ -24,18 +40,4 @@ export class ShopComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  constructor(
-    private productService: ProductService,
-    private  chartService: ChartService,
-    private menuService: MenuService
-  ) { }
-
-  ngOnInit(): void {
-    this.products = this.productService.findAll();
-  }
-
-  addProductChart(product: Product) {
-    this.chartService.addProduct(product);
-    // this.menuService.addProduct(product);
-  }
 }

@@ -19,6 +19,7 @@ import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatLineModule} from "@angular/material/core";
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -33,8 +34,8 @@ import {MatLineModule} from "@angular/material/core";
     BrowserAnimationsModule,
     CommonModule,
     MatButtonModule,
-    MatLineModule
-
+    MatLineModule,
+    MatListModule
   ],
     declarations: [
         AppComponent,

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../_models/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import products from '../static-variables';
+import { StaticVariables } from '../static-variables';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  // products: Product[];
-  private productsUrl = 'http://localhost:8080/products';
+  products: Product[] = StaticVariables.productList;
+  private productsUrl = 'http://localhost:8080/this.products';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -21,7 +21,7 @@ export class ProductService {
 
 
   addProduct(product: Product) {
-    products.push(product);
+    this.products.push(product);
   }
 
   // updateProduct(product: Product) : Observable<any> {
@@ -34,9 +34,9 @@ export class ProductService {
 
 
   updateProduct(productId: number, product: Product) {
-    const index = products.findIndex(x => x.id === productId);
+    const index = this.products.findIndex(x => x.id === productId);
     if (index !== -1) {
-      products[index] = product;
+      this.products[index] = product;
     }
   }
 
@@ -49,9 +49,9 @@ export class ProductService {
 
 
   deleteProduct(id: number) {
-    const index = products.findIndex(x => x.id === id);
+    const index = this.products.findIndex(x => x.id === id);
     if (index !== -1) {
-      products.splice(index, 1);
+      this.products.splice(index, 1);
     }
   }
 
@@ -61,14 +61,14 @@ export class ProductService {
 
 
   find(id: number): Product {
-    return products.find(x => x.id === id);
+    return this.products.find(x => x.id === id);
   }
 
   // getProductAll() :Observable<Product[]>{
-  //   return  this.http.get(this.productsUrl).pipe(map((data:any) => {return data._embedded.products}));
+  //   return  this.http.get(this.productsUrl).pipe(map((data:any) => {return data._embedded.this.products}));
   // }
 
   findAll(): Product[] {
-    return products.slice();
+    return this.products.slice();
   }
 }
