@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from "../_models/product";
 import {ProductService} from "../products/product.service";
 import {ChartService} from "../chart/chart.service";
+import {MenuService} from "../menu/menu.service";
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +23,7 @@ export class ShopComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  constructor( private productService: ProductService, private  chartService: ChartService) { }
+  constructor( private productService: ProductService, private  chartService: ChartService, private menuService: MenuService) { }
 
   ngOnInit(): void
   {
@@ -31,5 +32,6 @@ export class ShopComponent implements OnInit {
 
   addProductChart(product: Product) {
   this.chartService.addProduct(product);
+  this.menuService.addProduct(product);
   }
 }

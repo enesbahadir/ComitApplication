@@ -17,6 +17,8 @@ import { MenuComponent } from './menu/menu.component';
 import { MatIconModule} from "@angular/material/icon";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatLineModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatCardModule} from "@angular/material/card";
     _MatMenuDirectivesModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    MatButtonModule,
+    MatLineModule
 
   ],
     declarations: [

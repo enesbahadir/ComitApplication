@@ -21,6 +21,7 @@ export class ProductService {
     //   return this.http.post<Product>('${this.productsUrl}' , product, {observe : "response"});
     // }
 
+
     addProduct(product: Product) {
         this.products.push(product);
     }
