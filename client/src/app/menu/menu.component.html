@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="user">
-   <img src="https://i.ibb.co/tLZZpJn/Screenshot-2-1.png" alt="Screenshot-2-1" border="0">
+    <img src="https://i.ibb.co/tLZZpJn/Screenshot-2-1.png" alt="Screenshot-2-1" border="0">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -23,17 +23,17 @@
         </li>
       </ul>
       <span class="example-spacer"></span>
-      <a class="nav-link" routerLink="/shop" routerLinkActive="active" [matMenuTriggerFor]="menu">
+      <a class="nav-link" [matMenuTriggerFor]="menu" (onMenuOpen)="getCartList()">
         <mat-icon color="primary">shop</mat-icon>
       </a>
 
       <mat-menu #menu="matMenu">
         <mat-list>
-          <mat-list-item *ngFor="let product of products">
-              <div mat-line>{{product.name}}</div>
-              <div mat-line>{{product.description}}</div>
-              <div>{{product.price}}₺</div>
-            <mat-icon  (click)="deleteChartProduct(product.id)" color="warn">delete</mat-icon>
+          <mat-list-item *ngFor="let cart of carts">
+            <div mat-line>{{cart.name}}</div>
+            <div mat-line>{{cart.description}}</div>
+            <div>{{cart.price}}₺</div>
+            <mat-icon  (click)="deleteChartProduct(cart.id)" color="warn">delete</mat-icon>
           </mat-list-item>
         </mat-list>
 
@@ -51,4 +51,3 @@
   </nav>
 
 </header>
-

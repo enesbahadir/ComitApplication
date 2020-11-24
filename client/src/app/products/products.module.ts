@@ -6,29 +6,29 @@ import { RouterModule, Routes} from "@angular/router";
 import { AddEditComponent} from "./add-edit.component";
 
 const routes: Routes = [
-    {
-        path: '',
-        component: ListComponent
-    },
-    {
-        path: 'add',
-        component: AddEditComponent
-    },
-    {
-        path: 'edit/:id',
-        component: AddEditComponent
-    }
-]
+  {
+    path: '',
+    component: ListComponent
+  },
+  {
+    path: 'add',
+    component: AddEditComponent
+  },
+  {
+    path: 'edit/:id',
+    component: AddEditComponent
+  }
+];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes)
-    ],
-    declarations: [
-        ListComponent,
-        AddEditComponent
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [
+    ListComponent,
+    AddEditComponent
+  ]
 })
 export class ProductsModule { }

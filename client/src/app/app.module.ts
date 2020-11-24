@@ -19,6 +19,7 @@ import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatLineModule} from "@angular/material/core";
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -33,23 +34,23 @@ import {MatLineModule} from "@angular/material/core";
     BrowserAnimationsModule,
     CommonModule,
     MatButtonModule,
-    MatLineModule
-
+    MatLineModule,
+    MatListModule
   ],
-    declarations: [
-        AppComponent,
-        AlertComponent,
-        HomeComponent,
-        OrderComponent,
-        MenuComponent
-    ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  declarations: [
+    AppComponent,
+    AlertComponent,
+    HomeComponent,
+    OrderComponent,
+    MenuComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-        // provider used to create fake backend
-        fakeBackendProvider
-    ],
-    bootstrap: [AppComponent]
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { };

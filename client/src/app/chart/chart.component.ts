@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../_models/product";
-import {ChartService} from "./chart.service";
-import {ProductService} from "../products/product.service";
-import {OrderService} from "../order/order.service";
+import { Product } from '../_models/product';
+import { ChartService } from './chart.service';
+import { OrderService } from '../order/order.service';
 
 @Component({
   selector: 'app-chart',
@@ -11,33 +10,32 @@ import {OrderService} from "../order/order.service";
 })
 
 export class ChartComponent implements OnInit {
-products : Product[];
+  carts: Product[];
+
   constructor(
-      private  chartService : ChartService,private productService: ProductService, private  orderService: OrderService
+    private chartService: ChartService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
-    this.products = this.chartService.products;
+    this.carts = this.chartService.findAll();
 
     this.getTotalPrice();
 
   }
 
-  deleteChartProduct(id: string) {
-    this.chartService.deleteChartProduct(id);
+  deleteChartProduct(id: number) {
+    this.chartService.deleteChartItem(id);
     // refresh the list
-    this.products = this.chartService.findAll();
+    this.carts = this.chartService.findAll();
   }
+
   getTotalPrice() {
     let total = 0;
 
-    this.products.map(item => {
+    this.carts.map(item => {
       total += item.price;
     });
     return total
   }
-
-
-
 }
-
