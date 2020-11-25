@@ -37,20 +37,19 @@ import { MatListModule } from '@angular/material/list';
     MatLineModule,
     MatListModule
   ],
-    declarations: [
-        AppComponent,
-        AlertComponent,
-        HomeComponent,
-        OrderComponent,
-        MenuComponent
-    ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  declarations: [
+    AppComponent,
+    AlertComponent,
+    HomeComponent,
+    MenuComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-        // provider used to create fake backend
-        fakeBackendProvider
-    ],
-    bootstrap: [AppComponent]
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { };

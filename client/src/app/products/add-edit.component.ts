@@ -30,6 +30,8 @@ export class AddEditComponent implements OnInit {
   ) {
   }
 
+
+
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
@@ -77,9 +79,9 @@ export class AddEditComponent implements OnInit {
       return;
     }
 
-        this.loading = true;
-        if (this.isAddMode) {
-            const uploadData = new FormData();
+    this.loading = true;
+    if (this.isAddMode) {
+      const uploadData = new FormData();
             uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
             this.http.post('http://localhost:8080/api/upload', uploadData, { observe: 'response' })
               .subscribe((response) => {
@@ -92,23 +94,23 @@ export class AddEditComponent implements OnInit {
                   console.log('Image not uploaded successfully');
                  }
               });
-
-        } else {
-            this.productService.updateProduct(this.form.value);
-        }
-        this.router.navigate(['/products']);
+    } else {
+      this.productService.updateProduct(this.id, this.form.value);
     }
+    this.router.navigate(['/products']);
+  }
 
-    onFileChange(event) {
-      this.selectedFile = event.target.files[0];
-      const reader = new FileReader();
-      if (event.target.files && event.target.files.length) {
-          reader.readAsDataURL(event.target.files[0]);
+  onFileChange(event) {
+    this.selectedFile = event.target.files[0];const reader = new FileReader();
 
-          reader.onload = () => {
-              this.imgURL = reader.result;
-              this.cd.markForCheck();
-          };
-      }
+    if (event.target.files && event.target.files.length) {
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = () => {
+        this.imgURL = reader.result
+        ;
+        this.cd.markForCheck();
+      };
     }
+  }
 }

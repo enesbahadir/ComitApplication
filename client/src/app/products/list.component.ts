@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from "../_models/product";
-import { ProductService } from "./product.service";
-import { DomSanitizer } from '@angular/platform-browser';
+import { Product } from '../_models/product';
+import { ProductService } from './product.service';
 
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-    products: Product[];
+  products: Product[];
     loading = false;
 
-    constructor(
-        private productService: ProductService
-    ) {}
+  constructor(
+    private productService: ProductService
+  ) {}
 
-    ngOnInit() {
-        this.getProducts();
+  ngOnInit() {
+    this.getProducts();
     }
 
     getProducts(): void {
       this.productService.getProductAll().subscribe(data => {
         this.handleImage(data)
         });
-    }
+  }
 
     deleteProduct(id: number) {
     this.loading = true;
