@@ -2,8 +2,8 @@ Feature: Login Process Test Fature
 
   Scenario: Login process is successful with a valid username and valid password
     Given comit app login page, valid user with a valid username and valid password
-      | username                                | password          |
-      | Zaphod                                  | zaphod@galaxynet  |
+      | username                                  | password          |
+      | Zaphoder32                                | zaphod@galaxynet  |
     When the user fill login form
     Then login process should be successful
 

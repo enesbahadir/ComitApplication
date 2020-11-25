@@ -1,74 +1,44 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../_models/product';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { StaticVariables } from '../static-variables';
+import { Injectable } from "@angular/core";
+import { Product } from "../_models/product";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { observable, Observable, of } from 'rxjs';
+import { map } from "rxjs/operators";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: "root"})
 export class ProductService {
-  products: Product[] = StaticVariables.productList;
-  private productsUrl = 'http://localhost:8080/this.products';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
-  constructor(private http: HttpClient) {
-  }
+    private productsUrl = 'http://localhost:8080/api/products';
 
+    httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-  // addProduct(product : Product){
-  //   return this.http.post<Product>('${productsUrl}' , product, {observe : "response"});
-  // }
-
-
-  addProduct(product: Product) {
-    this.products.push(product);
-  }
-
-  // updateProduct(product: Product) : Observable<any> {
-  //   const url = '${productsUrl}/${product.id}';
-  //   return this.http.put(url,product, this.httpOptions);
-  //   }
-  // }
-  //
-  //
-
-
-  updateProduct(productId: number, product: Product) {
-    const index = this.products.findIndex(x => x.id === productId);
-    if (index !== -1) {
-      this.products[index] = product;
+    constructor(private http: HttpClient) {
     }
-  }
 
-  // deleteProduct(product: Product | number): Observable<Product> {
-  //   const id = typeof product === 'number' ? product : product.id;
-  //   const url = `${this.productsUrl}/${id}`;
-  //
-  //   return this.http.delete<Product>(url, this.httpOptions);
-  // }
+   addProduct(product : Product) : Observable<any>{
+     return this.http.post(this.productsUrl, product);
+   }
+
+   updateProduct(product: Product) : Observable<any> {
+     const url = '${this.productsUrl}/${id}';
+     return this.http.put(url,product, this.httpOptions);
+   }
+
+   deleteProduct(product: Product | number): Observable<Product> {
+     const id = typeof product === 'number' ? product : product.id;
+     const url = `${this.productsUrl}/${id}`;
+
+     return this.http.delete<Product>(url, this.httpOptions);
+   }
+
+   getProduct(id : number):Observable<Product>{
+     return  this.http.get<Product>('${this.productsUrl}/${id}');
+   }
+
+   getProductAll(): Observable<any>{
+     return  this.http.get(this.productsUrl);
+   }
 
 
-  deleteProduct(id: number) {
-    const index = this.products.findIndex(x => x.id === id);
-    if (index !== -1) {
-      this.products.splice(index, 1);
-    }
-  }
-
-  // getProduct(id : string):Observable<Product>{
-  //   return  this.http.get<Product>('${this.productsUrl}/${id}');
-  // }
-
-
-  find(id: number): Product {
-    return this.products.find(x => x.id === id);
-  }
-
-  // getProductAll() :Observable<Product[]>{
-  //   return  this.http.get(this.productsUrl).pipe(map((data:any) => {return data._embedded.this.products}));
-  // }
-
-  findAll(): Product[] {
-    return this.products.slice();
-  }
 }

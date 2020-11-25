@@ -1,8 +1,6 @@
 package com.comit.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -20,7 +18,8 @@ public class Product {
 
     private Long price;
 
-    private String picUrl;
+    @Column(length = 1048576)
+    private byte[] picByte;
 
     public int getId() {
         return id;
@@ -30,11 +29,11 @@ public class Product {
         this.id = id;
     }
 
-    public Product(String name, String description, Long price, String picUrl) {
+    public Product(String name, String description, Long price, byte[] picByte) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.picUrl = picUrl;
+        this.picByte = picByte;
     }
 
     public String getName() {
@@ -61,11 +60,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public byte[] getPicByte() {
+        return picByte;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+    public void setPicByte(byte[] picByte) {
+        this.picByte = picByte;
     }
 }

@@ -70,7 +70,7 @@ public class LoginStepDefs {
     @When("the user fill login form")
     public void theUserFillLoginForm() throws Throwable {
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/api/auth/signin")
+                .post("http://localhost:8080/api/auth/signin")
                 .content(asJsonString(loginForm))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -112,9 +112,10 @@ public class LoginStepDefs {
 
     @Then("login process should be unsuccessful")
     public void loginProcessShouldBeUnsuccessful() throws Throwable{
-        MvcResult result = action.andReturn();
-        String login = result.getResponse().getContentAsString();
-        Assert.assertEquals("false", login);
+        action.andExpect(status().is(401));
+        //MvcResult result = action.andReturn();
+        //String login = result.getResponse().getContentAsString();
+        //Assert.assertEquals("false", login);
 
     }
 
@@ -140,10 +141,10 @@ public class LoginStepDefs {
 
     @Then("login process with wrong username should be unsuccessful")
     public void loginProcessWithWrongUsernameShouldBeUnsuccessful() throws Throwable{
-        //action.andExpect(status().is(400));
-        MvcResult result = action.andReturn();
-        String login = result.getResponse().getContentAsString();
-        Assert.assertEquals("false", login);
+        action.andExpect(status().is(401));
+        //MvcResult result = action.andReturn();
+        //String login = result.getResponse().getContentAsString();
+        //Assert.assertEquals("false", login);
     }
 }
 

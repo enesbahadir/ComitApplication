@@ -40,4 +40,24 @@ export class ShopComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
+  constructor( private productService: ProductService, private  chartService: ChartService) { }
+
+  ngOnInit(): void
+  {
+    this.productService.getProductAll().subscribe(products =>
+      this.handleImage(products));
+  }
+
+  addProductChart(product: Product) {
+    this.chartService.addProduct(product);
+  }
+
+  handleImage(response)
+  {
+      for (const product of response)
+      {
+        product.image = 'data:image/jpeg;base64,' + product.picByte;
+      }
+      this.products = response;
+  }
 }
