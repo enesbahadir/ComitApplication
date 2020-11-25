@@ -6,6 +6,6 @@ export interface User {
     name: string;
     surName: string;
     role : string[];
-    //accessToken: string;
-  token: string
+    accessToken: string;
+
 }

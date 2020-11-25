@@ -22,6 +22,11 @@ export class ChartService {
         }
     }
 
+    deleteAll() {
+    console.log("second");
+      this.cartList.length = 0;
+    }
+
     findAll(): Product[] {
         return this.cartList.slice();
     }

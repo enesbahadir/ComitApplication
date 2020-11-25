@@ -117,6 +117,6 @@ public class RegisterController {
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
-                "USER"));
+                userDetails.getAuthorities().toString()));
     }
 }
