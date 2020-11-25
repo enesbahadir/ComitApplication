@@ -23,16 +23,32 @@
         </li>
       </ul>
       <span class="example-spacer"></span>
-      <a class="nav-link" routerLink="/shop" routerLinkActive="active">
+      <a class="nav-link" [matMenuTriggerFor]="menu" (onMenuOpen)="getCartList()">
         <mat-icon color="primary">shop</mat-icon>
       </a>
 
+      <mat-menu #menu="matMenu">
+        <mat-list>
+          <mat-list-item *ngFor="let cart of carts">
+              <div mat-line>{{cart.name}}</div>
+              <div mat-line>{{cart.description}}</div>
+              <div>{{cart.price}}₺</div>
+            <mat-icon  (click)="deleteChartProduct(cart.id)" color="warn">delete</mat-icon>
+          </mat-list-item>
+        </mat-list>
+
+
+
+      </mat-menu>
+
+
       <a class="nav-link" routerLink="account/login" routerLinkActive="active">
         <mat-icon (click)="logout()" color="warn">logout</mat-icon>
-
       </a>
+
 
     </div>
   </nav>
+
 </header>
 

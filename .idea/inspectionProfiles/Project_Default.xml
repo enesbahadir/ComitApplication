@@ -4,8 +4,9 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="1">
+          <list size="2">
             <item index="0" class="java.lang.String" itemvalue="mat-icon-button" />
+            <item index="1" class="java.lang.String" itemvalue="mat-subheader" />
           </list>
         </value>
       </option>
@@ -14,7 +15,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="9">
+          <list size="18">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -24,6 +25,15 @@
             <item index="6" class="java.lang.String" itemvalue="button" />
             <item index="7" class="java.lang.String" itemvalue="span" />
             <item index="8" class="java.lang.String" itemvalue="mat-toolbar" />
+            <item index="9" class="java.lang.String" itemvalue="mat-list" />
+            <item index="10" class="java.lang.String" itemvalue="mat-list-item" />
+            <item index="11" class="java.lang.String" itemvalue="mat-divider" />
+            <item index="12" class="java.lang.String" itemvalue="md-menu-content" />
+            <item index="13" class="java.lang.String" itemvalue="md-menu-item" />
+            <item index="14" class="java.lang.String" itemvalue="md-icon" />
+            <item index="15" class="java.lang.String" itemvalue="md-button" />
+            <item index="16" class="java.lang.String" itemvalue="md-menu-divider" />
+            <item index="17" class="java.lang.String" itemvalue="md-menu" />
           </list>
         </value>
       </option>

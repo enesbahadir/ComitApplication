@@ -1,37 +1,34 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AlertService} from '../_services';
-import {ProductService} from "./product.service";
-import { Product } from "../_models/product"
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../_services';
+import { ProductService } from './product.service';
 import { HttpClient } from "@angular/common/http";
-
-
-@Component({templateUrl: 'add-edit.component.html'})
+import { Product } from "../_models/product"
+@Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
-    form: FormGroup;
-    id: number;
-    isAddMode: boolean;
-    loading = false;
-    submitted = false;
+  form: FormGroup;
+  /** product Id */
+  id: number;
+  isAddMode: boolean;
+  loading = false;
+  submitted = false;
     product: Product;
 
     private selectedFile;
     imgURL: any;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private alertService: AlertService,
-        private productService: ProductService,
-        private fb: FormBuilder,
-        private cd: ChangeDetectorRef,
-        private http: HttpClient
-        // public _d: DomSanitizer
-    ) {
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private alertService: AlertService,
+    private productService: ProductService,
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+    private http: HttpClient// public _d: DomSanitizer
+  ) {
+  }
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
@@ -52,31 +49,33 @@ export class AddEditComponent implements OnInit {
             this.form.updateValueAndValidity();
         }
     }
+  }
 
-    _initializeForm() {
-        this.form = this.formBuilder.group({
-            name: [null, Validators.required],
-            description: [null, Validators.required],
-            price: [0, Validators.required],
-            picByte: [null]
-        });
+  _initializeForm() {
+    this.form = this.formBuilder.group({
+
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      price: [0, Validators.required],
+      picByte: [null]
+    });
+  }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
     }
-
-    // convenience getter for easy access to form fields
-    get f() {
-        return this.form.controls;
-    }
-
-    onSubmit() {
-        this.submitted = true;
-
-        // reset alerts on submit
-        this.alertService.clear();
-
-        // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
-        }
 
         this.loading = true;
         if (this.isAddMode) {

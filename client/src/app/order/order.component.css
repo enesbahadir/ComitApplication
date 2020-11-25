@@ -1,0 +1,19 @@
+button.btn.btn-warning.float-right {
+  margin-right: 75px;
+  margin-top: 10px;
+}
+
+
+.check {
+  margin-top: 10px;
+}
+
+table.table.table-striped.text-center {
+  width: 90%;
+  margin: auto;
+}
+h5 {
+  display: inline;
+  margin-top: 10px;
+  margin-left: 75px;
+}

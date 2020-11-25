@@ -1,27 +1,28 @@
 import {Injectable} from "@angular/core";
 import {Product} from "../_models/product";
+import { StaticVariables } from '../static-variables';
 
 @Injectable({providedIn: "root"})
 export class ChartService {
-
-    products: Product[] = [];
     cartTotal: any  = 0;
+    cartList: Product[];
+
     constructor() {
-
+      this.cartList = StaticVariables.cartList;
     }
 
-    addProduct(product: Product) {
-        this.products.push(product);
+    addToCart(product: Product) {
+      this.cartList.push(product);
     }
 
-    deleteChartProduct(id: number) {
-        const index = this.products.findIndex(x => x.id === id);
+    deleteChartItem(id: number) {
+        const index = this.cartList.findIndex(x => x.id === id);
         if (index !== -1) {
-            this.products.splice(index, 1);
+          this.cartList.splice(index, 1);
         }
     }
 
     findAll(): Product[] {
-        return this.products.slice();
+        return this.cartList.slice();
     }
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'edit/:id',
         component: AddEditComponent
     }
-]
+];
 
 @NgModule({
     imports: [
