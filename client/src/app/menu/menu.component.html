@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="/products" routerLinkActive="active" >Admin </a>
         </li>
         <li class="nav-item">
@@ -28,16 +28,40 @@
       </a>
 
       <mat-menu #menu="matMenu">
-        <mat-list>
-          <mat-list-item *ngFor="let cart of carts">
-              <div mat-line>{{cart.name}}</div>
-              <div mat-line>{{cart.description}}</div>
-              <div>{{cart.price}}₺</div>
-            <mat-icon  (click)="deleteChartProduct(cart.id)" color="warn">delete</mat-icon>
-          </mat-list-item>
-        </mat-list>
+        <div>Charts</div>
+        <mat-divider></mat-divider>
+        <div class="menucard">
+          <div class="container" *ngFor="let cart of carts">
+            <div class="row">
 
+              <div>
+                <h6>{{cart.name}}</h6>
+                <span class="dec-css">{{cart.description}}</span>
+              </div>
 
+              <div style="margin: auto">
+                <h5>{{cart.price}}₺</h5>
+              </div>
+
+              <div style="margin-left: auto;">
+                <a class="nav-link"><mat-icon (click)="deleteChartProduct(cart.id)" color="warn">delete</mat-icon></a>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+          </div>
+          <mat-divider></mat-divider>
+          <h5>Total: {{getTotalPrice()}}₺</h5>
+          <mat-divider></mat-divider>
+          <br>
+          <div style="margin-right: auto">
+            <a mat-flat-button color="accent" ><mat-icon (click)="deleteAll()">delete</mat-icon>Hepsini sil</a>
+          </div>
+          <br>
+          <div style="margin-left: auto">
+            <a mat-flat-button routerLink="/chart" routerLinkActive="active" color="primary"><mat-icon>shop</mat-icon>Sepete Git</a>
+          </div>
+        </div>
 
       </mat-menu>
 
