@@ -52,7 +52,7 @@ public class ProductStepDefs {
     @When("user fill product add form, new product is posted")
     public void userFillProductAddFormNewProductIsPosted() throws Throwable {
         action = mvc.perform(MockMvcRequestBuilders
-                .post("/products")
+                .post("/api/products")
                 .content(asJsonString(product))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -87,7 +87,7 @@ public class ProductStepDefs {
         List<String> data = dataTable.row(1);
         Product editedProduct = new Product(data.get(0), data.get(1), Long.valueOf(data.get(2)), null);
         action = mvc.perform(MockMvcRequestBuilders
-                .put("/products/2")
+                .put("/api/products/2")
                 .content(asJsonString(editedProduct))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -112,7 +112,7 @@ public class ProductStepDefs {
     @When("user push delete button")
     public void userPushDeleteButton() throws Throwable{
         action = mvc.perform(MockMvcRequestBuilders
-                .delete("/products/2")
+                .delete("/api/products/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());
@@ -136,7 +136,7 @@ public class ProductStepDefs {
     @When("user should see all products")
     public void userShouldSeeAllProducts() throws Throwable {
         action = mvc.perform(MockMvcRequestBuilders
-                .get("/products")
+                .get("/api/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());

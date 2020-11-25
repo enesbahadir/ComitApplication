@@ -12,7 +12,7 @@
                 <th style="width: 30%">Name</th>
                 <th style="width: 30%">Description</th>
                 <th style="width: 30%">Price</th>
-                <th style="width: 30%">İmage</th>
+                <th style="width: 30%">Image</th>
                 <th style="width: 10%"></th>
             </tr>
             </thead>
@@ -22,7 +22,7 @@
                 <td>{{product.description}}</td>
                 <td>{{product.price}}</td>
                 <td>
-                    <img [src]="product.file" alt="Resim yok" width="15">
+                    <img [src]="product.image" alt="Resim yok" width="15">
                 </td>
                 <td></td>
 <!--                <td><img height="10px" width="10px" [src]="_d.bypassSecurityTrustUrl(imgsrc)"></td>-->
@@ -31,9 +31,10 @@
                 <td style="white-space: nowrap">
                     <a [routerLink]="['/products', 'edit', product.id]"
                        class="btn btn-sm btn-primary mr-1">Edit</a>
-                    <button (click)="deleteProduct(product.id)"
+                    <button [disabled]="loading" (click)="deleteProduct(product.id)"
                             class="btn btn-sm btn-danger btn-delete-product">
                         <span>Delete</span>
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     </button>
                 </td>
             </tr>
