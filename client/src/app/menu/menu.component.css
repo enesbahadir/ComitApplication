@@ -5,3 +5,17 @@
 .white-icon {
   color: white;
 }
+.dec-css {
+  color: #9E9E9E;
+}
+
+
+button{
+  width: 100px;
+}
+
+.menucard{
+  box-shadow: 6px 11px 41px -28px #a99de7;
+  width: 250px;
+  padding: 1rem;
+}

@@ -26,20 +26,19 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   logout() {
     this.accountService.logout();
   }
 
-  deleteChartProduct(id: number) {
-    const index = this.carts.findIndex(x => x.id === id);
-    if (index !== -1) {
-      this.carts.splice(index, 1);
-    }
-  }
+
 
   getCartList() {
     this.carts = this.cartService.findAll();
   }
+
+
+
 }

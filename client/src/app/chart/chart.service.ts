@@ -5,7 +5,7 @@ import { StaticVariables } from '../static-variables';
 @Injectable({providedIn: "root"})
 export class ChartService {
   cartTotal: any  = 0;
-  cartList: Product[];
+  readonly cartList: Product[];
 
   constructor() {
     this.cartList = StaticVariables.cartList;
@@ -24,5 +24,9 @@ export class ChartService {
 
   findAll(): Product[] {
     return this.cartList.slice();
+  }
+
+  clear() {
+    this.cartList.splice(0);
   }
 }

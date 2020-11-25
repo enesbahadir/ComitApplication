@@ -41,7 +41,6 @@ import { MatListModule } from '@angular/material/list';
     AppComponent,
     AlertComponent,
     HomeComponent,
-    OrderComponent,
     MenuComponent
   ],
   providers: [

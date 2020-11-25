@@ -3,6 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OrderComponent} from "./order.component";
 import {RouterModule, Routes} from "@angular/router";
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
 
 const routes: Routes = [
     {
@@ -11,11 +13,13 @@ const routes: Routes = [
     }
 ]
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes)
-    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    MatListModule,
+    MatIconModule
+  ],
     declarations: [
         OrderComponent
     ]
