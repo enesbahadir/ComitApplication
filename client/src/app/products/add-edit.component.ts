@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../_services';
 import { ProductService } from './product.service';
-
-
+import { HttpClient } from "@angular/common/http";
+import { Product } from "../_models/product"
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
   form: FormGroup;
@@ -13,6 +13,10 @@ export class AddEditComponent implements OnInit {
   isAddMode: boolean;
   loading = false;
   submitted = false;
+    product: Product;
+
+    private selectedFile;
+    imgURL: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,44 +25,41 @@ export class AddEditComponent implements OnInit {
     private alertService: AlertService,
     private productService: ProductService,
     private fb: FormBuilder,
-    private cd: ChangeDetectorRef
-    // public _d: DomSanitizer
+    private cd: ChangeDetectorRef,
+    private http: HttpClient// public _d: DomSanitizer
   ) {
   }
 
-  // fileChange(e) {
-  //     const file = e.srcElement.files[0];
-  //     this.imgsrc = window.URL.createObjectURL(file);
-  // }
-
-  ngOnInit() {
-    this.id = parseInt(this.route.snapshot.params['id']);
-    this.isAddMode = !this.id;
-    this._initializeForm();
 
 
-    if (!this.isAddMode) {
-      const product = this.productService.find(this.id);
-      if (product?.id) {
-        this.form.setValue({
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          file: product.file
-        });
-        this.form.updateValueAndValidity();
-      }
+    ngOnInit() {
+        this.id = this.route.snapshot.params['id'];
+        this.isAddMode = !this.id;
+        this._initializeForm();
+
+
+        if (!this.isAddMode) {
+            this.productService.getProduct(this.id)
+            .subscribe(productModel => this.product = productModel);
+            this.form.setValue({
+                id: this.product.id,
+                name: this.product.name,
+                description: this.product.description,
+                price: this.product.price,
+                picByte: this.product.picByte
+            });
+            this.form.updateValueAndValidity();
+        }
     }
-  }
+
 
   _initializeForm() {
     this.form = this.formBuilder.group({
-      id: [null, Validators.required],
+
       name: [null, Validators.required],
       description: [null, Validators.required],
       price: [0, Validators.required],
-      file: [null]
+      picByte: [null]
     });
   }
 
@@ -80,7 +81,19 @@ export class AddEditComponent implements OnInit {
 
     this.loading = true;
     if (this.isAddMode) {
-      this.productService.addProduct(this.form.value);
+      const uploadData = new FormData();
+            uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
+            this.http.post('http://localhost:8080/api/upload', uploadData, { observe: 'response' })
+              .subscribe((response) => {
+                 if (response.status === 200) {
+                  this.productService.addProduct(this.form.value).subscribe(
+                               response => {
+                               });
+                 }
+                 else {
+                  console.log('Image not uploaded successfully');
+                 }
+              });
     } else {
       this.productService.updateProduct(this.id, this.form.value);
     }
@@ -88,18 +101,14 @@ export class AddEditComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    this.selectedFile = event.target.files[0];const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(event.target.files[0]);
 
       reader.onload = () => {
-        this.form.patchValue({
-          file: reader.result
-        });
-
-        // need to run CD since file load runs outside of zone
+        this.imgURL = reader.result
+        ;
         this.cd.markForCheck();
       };
     }

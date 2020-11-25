@@ -20,7 +20,9 @@ export class ChartService {
     if (index !== -1) {
       this.cartList.splice(index, 1);
     }
-  }
+  }deleteAll() {
+      this.cartList.length = 0;
+    }
 
   findAll(): Product[] {
     return this.cartList.slice();

@@ -3,5 +3,6 @@ export interface Product {
     name: string;
     description: string;
     price: number;
-    file: string;
+    picByte: string;
+    image: string;
 }

@@ -23,7 +23,8 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.findAll();
+   this.productService.getProductAll().subscribe(products =>
+         this.handleImage(products));
   }
 
   addProductChart(product: Product) {
@@ -40,4 +41,12 @@ export class ShopComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
+  handleImage(response)
+  {
+      for (const product of response)
+      {
+        product.image = 'data:image/jpeg;base64,' + product.picByte;
+      }
+      this.products = response;
+  }
 }

@@ -60,4 +60,8 @@ export class ChartComponent implements OnInit {
     });
     return total
   }
+
+
+
 }
+
