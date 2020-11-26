@@ -53,7 +53,7 @@ export class OrderService {
 
 
   getOrdersUser(id : number) {
-    return this.http.get<Order[]>('http://localhost:8080/api/orders/user/${id}');
+    return this.http.get<Order[]>('http://localhost:8080/api/orders/user/'+id);
   }
 
 
