@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      // Form alan kontrolü
+      // Register Form alan kontrolü
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
             surName: ['', Validators.required],

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_models/product';
+import { IProduct } from '../_models/product';
 import { ProductService } from './product.service';
 
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-  products: Product[];
+  products: IProduct[];
     loading = false;
 
   constructor(

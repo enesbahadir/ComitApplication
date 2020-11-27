@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { Product } from '../_models/product';
-import { ChartService } from './chart.service';
-import { OrderService } from '../order/order.service';
-import {Order} from "../_models/order";
+import {IProduct} from '../_models/product';
+import {ChartService} from './chart.service';
+import {OrderService} from '../order/order.service';
+import {IOrder} from "../_models/order";
 import {AccountService} from "../_services";
 
 @Component({
@@ -12,10 +12,11 @@ import {AccountService} from "../_services";
 })
 
 export class ChartComponent implements OnInit {
-  charts: Product[];
+  charts: IProduct[];
+
   constructor(
-    private  chartService: ChartService,  private orderService: OrderService,
-    private accountService : AccountService) {
+    private  chartService: ChartService, private orderService: OrderService,
+    private accountService: AccountService) {
   }
 
   ngOnInit(): void {
@@ -26,10 +27,11 @@ export class ChartComponent implements OnInit {
 
   // Chart sayfasında olan ürünleri order listesine ekler.
   addChartToOrderList() {
-    const  order : Order = {
-      products:this.charts,
-      user:this.accountService.userValue,
-      date:new Date()
+    const order: IOrder = {
+      products: this.charts,
+      // products:this.charts,
+      user: this.accountService.userValue,
+      date: new Date()
     }
 
     this.orderService.addToOrder(order).subscribe();

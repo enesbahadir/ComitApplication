@@ -1,18 +1,18 @@
 import {Injectable} from "@angular/core";
-import {Product} from "../_models/product";
+import {IProduct} from "../_models/product";
 import { StaticVariables } from '../static-variables';
 
 @Injectable({providedIn: "root"})
 export class ChartService {
   chartTotal = 0;
-  readonly chartList: Product[];
+  readonly chartList: IProduct[];
 
   constructor() {
     this.chartList = StaticVariables.cartList;
   }
 
   // Shop sayfasından cartListe ürünleri ekleme
-  addToCart(product: Product) {
+  addToCart(product: IProduct) {
     this.chartList.push(product);
   }
 
@@ -30,7 +30,7 @@ export class ChartService {
     }
 
     // Chart listesindeki ürünleri getirme.
-  findAll(): Product[] {
+  findAll(): IProduct[] {
     return this.chartList.slice();
   }
 

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../_models/product';
+import { IProduct } from '../_models/product';
 import {StaticVariables} from "../static-variables";
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
   chartTotal = 0;
-  products: Product[] = [];
-  cartList: Product[];
+  products: IProduct[] = [];
+  cartList: IProduct[];
 
   constructor() {
 }
 // Shoptan Menüdeki sepet listesine ürün ekleme.
-  addProduct(product: Product) {
+  addProduct(product: IProduct) {
     this.products.push(product);
   }
 
@@ -23,7 +23,7 @@ export class MenuService {
     }
   }
 
-  findAll(): Product[] {
+  findAll(): IProduct[] {
     return this.products.slice();
   }
 

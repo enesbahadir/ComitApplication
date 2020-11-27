@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../_services';
 import { ProductService } from './product.service';
 import { HttpClient } from "@angular/common/http";
-import { Product } from "../_models/product"
+import { IProduct } from "../_models/product"
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
   form: FormGroup;
@@ -13,7 +13,7 @@ export class AddEditComponent implements OnInit {
   isAddMode: boolean;
   loading = false;
   submitted = false;
-    product: Product;
+    product: IProduct;
 
     private selectedFile;
     imgURL: any;

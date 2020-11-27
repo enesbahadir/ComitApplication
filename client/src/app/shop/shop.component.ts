@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_models/product';
+import { IProduct } from '../_models/product';
 import { ProductService } from '../products/product.service';
 import { ChartService } from '../chart/chart.service';
 import { MenuService } from '../menu/menu.service';
@@ -10,7 +10,7 @@ import { MenuService } from '../menu/menu.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  products: Product[];
+  products: IProduct[];
 
   fileToUpload: any;
   imageUrl: any;
@@ -27,7 +27,7 @@ export class ShopComponent implements OnInit {
          this.handleImage(products));
   }
   // Shoptaki seçili ürünü chart'a ekleme
-  addProductChart(product: Product) {
+  addProductChart(product: IProduct) {
     this.chartService.addToCart(product);
   }
 
