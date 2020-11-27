@@ -1,8 +1,12 @@
 package com.comit.execption;
 
+/**
+ * Sistemde kayıtlı ilgili User nesnesini bulunamayınca fırlatılan exception
+ */
 public class UserNotFoundException extends RuntimeException {
+
     public UserNotFoundException(Integer id) {
-        super("Could not found user "+ id);
+        super(id + " numaralı kullanıcı bulunamadı!");
     }
 
     public UserNotFoundException() {

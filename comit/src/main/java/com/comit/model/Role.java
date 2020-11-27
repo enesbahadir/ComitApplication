@@ -2,6 +2,9 @@ package com.comit.model;
 
 import javax.persistence.*;
 
+/**
+ * Sistemde kayıtlı olan Role enum sınıfı database'e tablo haline getirmek için kullanılan sınıf
+ */
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -13,9 +16,7 @@ public class Role {
     @Column(length = 20)
     private ERole name;
 
-    public Role() {
-
-    }
+    public Role() { }
 
     public Role(ERole name) {
         this.name = name;

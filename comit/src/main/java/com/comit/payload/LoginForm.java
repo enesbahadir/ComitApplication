@@ -1,6 +1,10 @@
 package com.comit.payload;
 
+/**
+ * Kullanıcının login işlemi için post ettiği bilgilerin bulunduğu sınıftır.
+ */
 public class LoginForm {
+
     private String username;
 
     private String password;

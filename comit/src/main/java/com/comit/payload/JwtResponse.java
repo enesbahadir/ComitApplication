@@ -1,6 +1,11 @@
 package com.comit.payload;
 
+/**
+ * Kullanıcı login işlemini gerçekleştirdikten sonra response için kullanılan sınıftır. Token bilgisi bu sınıf aracılığı
+ * ile kullanıcıya iletilir.
+ */
 public class JwtResponse {
+
     private String token;
     private String type = "Bearer";
     private int id;

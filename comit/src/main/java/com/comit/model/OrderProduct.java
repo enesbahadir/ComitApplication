@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+/**
+ * Order-Product ilişkisinin database'de tablo olarak tutulmasını sağlayan sınıftır. OrderProductPk sınıfını kullanır.
+ */
 @Entity
 public class OrderProduct {
 
@@ -25,7 +28,6 @@ public class OrderProduct {
     public Product getProduct() {
         return this.pk.getProduct();
     }
-
 
     public OrderProductPk getPk() {
         return pk;

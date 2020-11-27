@@ -11,56 +11,93 @@ import java.io.IOException;
 import java.util.List;
 import java.util.zip.Deflater;
 
+/**
+ * Product CRUD işlemlerini gerçekleştiren api controller
+ */
 @RestController
 public class ProductController {
 
     private final ProductService productService;
 
-    private byte[] bytes;
+    private byte[] bytes; //Ürün resimleri için tutulan array
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
+    /**
+     * Yeni bir product nesnesi oluşturmak için kullanılan HTTP-POST metodu
+     *
+     * @param newProduct eklenecek product nesnesi
+     * @return Eklenen Product nesnesi
+     */
     @PostMapping("/api/products")
-    public Product createUser(@RequestBody Product newProduct)
-    {
+    public Product createProduct(@RequestBody Product newProduct) {
         newProduct.setPicByte(bytes);
         return productService.createProduct(newProduct);
-                /*EntityModel.of(newProduct,
-                linkTo(methodOn(RegisterController.class).getPreschoolById(newPreschool.getId())).withSelfRel(),
-                linkTo(methodOn(RegisterController.class).listOfPreschools()).withRel("preschools"));*/
     }
 
+    /**
+     * Product'a ait resim eklemek için kullanılan HTTP-POST metodu
+     *
+     * @param file sisteme yüklenecek olan resim dosyası
+     * @throws IOException
+     */
     @PostMapping("/api/upload")
     public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         this.bytes = file.getBytes();
     }
 
+    /**
+     * Sistemde kayıtlı olan Product nesnesini güncellemek için kullanılan HTTP-PUT metodu
+     *
+     * @param newProduct güncellenmiş Product nesnesi
+     * @param id         güncellenecek olan Prodcut'un id'si
+     * @return Güncellenmiş olan Product nesnesi
+     */
     @PutMapping("/api/products/{id}")
-    public Product updateProduct (@RequestBody Product newProduct, @PathVariable Integer id)
-    {
+    public Product updateProduct(@RequestBody Product newProduct, @PathVariable Integer id) {
         return productService.updateProduct(newProduct, id);
-
     }
 
+    /**
+     * Sistemde kayıtlı olan Product nesnesini silmek için kullanılan HTTP-DELETE metodu. Bir Order-Sipariş nesnesinde
+     * kullanıldı ise Delete metodu hata verir.
+     *
+     * @param id Silinecek olan Proeduct nesnesinin id'si
+     */
     @DeleteMapping("/api/products/{id}")
     void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }
 
+    /**
+     * Sistemde kayıtlı olan Product nesnenelerini listelemek için kullanılan HTTP-GET metodu
+     *
+     * @return Product listesi
+     */
     @GetMapping("/api/products")
-    public List<Product> getProducts()
-    {
+    public List<Product> getProducts() {
         return productService.getProducts();
     }
 
+    /**
+     * Verilen id değerine göre ilgili Product nesnesini dönen HTTP-GET metodu
+     *
+     * @param id ilgili Product nesnesinin id'si
+     * @return ilgili Product nesnesi
+     */
     @GetMapping("api/products/{id}")
-    public Product getProduct(@PathVariable Integer id)
-    {
+    public Product getProduct(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
 
+    /**
+     * Sistemde kayıtlı olan Product nesnenelerini 10'ar 10'ar sayfalarda listelemek için kullanılan HTTP-GET metodu
+     *
+     * @param pageNumber listelenek olan sayfa numarası
+     * @return ilgili sayfa numarasında bulunan Product listesi
+     */
     @GetMapping("/api/products/page")
     @ResponseBody
     public List<Product> findAllPaginatedProducts(@RequestParam("pageNumber") int pageNumber) {
@@ -68,29 +105,14 @@ public class ProductController {
         return resultPage.getContent();
     }
 
+    /**
+     * Sistemde kayıtlı olan Product nesnenelerini verilen arama değerine göre listelemek için kullanılan HTTP-GET metodu
+     *
+     * @param keyword Arama kriteri
+     * @return Ürün isminde, açıklamasında veya fiyatında arama kriterini içeren Product nesneleri listesi
+     */
     @GetMapping("/api/products/search")
     public List<Product> findAllSearchedProducts(@RequestParam("search") String keyword) {
         return productService.getProdcuts(keyword);
     }
-
-    public static byte[] compressBytes( byte[] data) {
-
-        Deflater deflater = new Deflater();
-        deflater.setInput(data);
-        deflater.finish();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[1024];
-        while (!deflater.finished()) {
-            int count = deflater.deflate(buffer);
-            outputStream.write(buffer, 0, count);
-        }
-        try {
-            outputStream.close();
-        } catch (IOException e) {
-        }
-        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
-        return outputStream.toByteArray();
-    }
-
-
 }
