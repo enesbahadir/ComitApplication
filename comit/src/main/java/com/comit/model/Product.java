@@ -18,7 +18,7 @@ public class Product {
 
     private Long price;
 
-    @Column(length = 1048576)
+    @Column(length = 5242880)
     private byte[] picByte;
 
     public int getId() {
