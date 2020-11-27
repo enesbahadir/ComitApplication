@@ -1,3 +1,4 @@
+@txn
 Feature: Register Test Feature
 
   Scenario: Registration is successful with a valid username and valid password
