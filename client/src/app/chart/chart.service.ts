@@ -4,31 +4,38 @@ import { StaticVariables } from '../static-variables';
 
 @Injectable({providedIn: "root"})
 export class ChartService {
-  cartTotal: any  = 0;
-  readonly cartList: Product[];
+  chartTotal = 0;
+  readonly chartList: Product[];
 
   constructor() {
-    this.cartList = StaticVariables.cartList;
+    this.chartList = StaticVariables.cartList;
   }
 
+  // Shop sayfasından cartListe ürünleri ekleme
   addToCart(product: Product) {
-    this.cartList.push(product);
+    this.chartList.push(product);
   }
 
+  // Chart sayafasında eklenen ürünü silme
   deleteChartItem(id: number) {
-    const index = this.cartList.findIndex(x => x.id === id);
+    const index = this.chartList.findIndex(x => x.id === id);
     if (index !== -1) {
-      this.cartList.splice(index, 1);
+      this.chartList.splice(index, 1);
     }
-  }deleteAll() {
-      this.cartList.length = 0;
-    }
-
-  findAll(): Product[] {
-    return this.cartList.slice();
   }
 
+  // Chart listesini silme.
+  deleteAll() {
+      this.chartList.length = 0;
+    }
+
+    // Chart listesindeki ürünleri getirme.
+  findAll(): Product[] {
+    return this.chartList.slice();
+  }
+
+  // Chart listesinden ordere aktarılan ürünleri charttan silme.
   clear() {
-    this.cartList.splice(0);
+    this.chartList.splice(0);
   }
 }

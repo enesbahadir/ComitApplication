@@ -41,14 +41,12 @@ export class MenuComponent implements OnInit {
   }
 
   deleteChartProduct(id: number) {
-    //const index = this.carts.findIndex(x => x.id === id);
-    //if (index !== -1) {
-      //this.carts.splice(index, 1);
       this.cartService.deleteChartItem(id);
       this.getCartList();
 
   }
 
+  // Menüdeki sepeteki ürünlerin hepsini silme
   deleteAll() {
     console.log("first");
     this.cartService.deleteAll();
@@ -56,11 +54,12 @@ export class MenuComponent implements OnInit {
   }
 
 
-
+// Cart listesindeki ürünleri menüdeki sepette gösteririr.
   getCartList() {
     this.carts = this.cartService.findAll();
   }
 
+  // Menüdeki sepetteki ürünlerin toplam fiyatını gösterir.
     getTotalPrice() {
       let total = 0;
 

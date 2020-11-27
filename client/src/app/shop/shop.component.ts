@@ -26,10 +26,9 @@ export class ShopComponent implements OnInit {
    this.productService.getProductAll().subscribe(products =>
          this.handleImage(products));
   }
-
+  // Shoptaki seçili ürünü chart'a ekleme
   addProductChart(product: Product) {
     this.chartService.addToCart(product);
-    // this.menuService.addProduct(product);
   }
 
   handleFileInput(file: FileList) {
@@ -40,7 +39,7 @@ export class ShopComponent implements OnInit {
     };
     reader.readAsDataURL(this.fileToUpload);
   }
-
+  // Ürünün resminin chartta görüntülenmesi.
   handleImage(response)
   {
       for (const product of response)

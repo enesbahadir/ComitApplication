@@ -26,42 +26,26 @@ export class OrderService {
   }
 
 
-
+// Chartta bulunan ürünleri order sayfasına ekleme.
   addToOrder(order: Order) {
     return this.http.post<Order>(`${this.orderUrl}`, order, {
       observe: 'response'
     });
   }
 
-
-  // addToOrder(products: Product[]) {
-  //   debugger
-  //   this.orderList.push({
-  //     products: products,
-  //     user: this.accountService.userValue,
-  //     date: new Date()
-  //   });
-  //   this.cartService.clear();
-  // }
-
-
-
-
+// Order'e eklenmiş ürünleri gösterir.(Admin görebilir)
   getOrdersAll() {
     return this.http.get<Order[]>('http://localhost:8080/api/orders');
   }
 
-
+// Kullanıcının kendi eklediği ürüneleri görme.
   getOrdersUser(id : number) {
     return this.http.get<Order[]>('http://localhost:8080/api/orders/user/${id}');
   }
 
 
-
   findAll(): Order[] {
     return this.orderList.slice();
   }
-
-
 }
 

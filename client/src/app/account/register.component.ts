@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+      // Form alan kontrolü
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
             surName: ['', Validators.required],
@@ -28,16 +29,16 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // convenience getter for easy access to form fields
+    // Form alanlarındaki özellikleri alamak için kullanılır.
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        // reset alerts on submit
+        // Submit olduğunda uyaruları temizle.
         this.alertService.clear();
 
-        // stop here if form is invalid
+        // Form geçersiz olduğunda aynı yerde kal.
         if (this.form.invalid) {
             return;
         }
@@ -46,10 +47,12 @@ export class RegisterComponent implements OnInit {
         this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({
-                next: () => {
+               // Form doğru gönderildiğinde başarılı mesa jı göndirir ve  login sayfasına yönlendirir.
+              next: () => {
                     this.alertService.success('KAYIT BAŞARILI', { keepAfterRouteChange: true });
                     this.router.navigate(['../login'], { relativeTo: this.route });
                 },
+              // Form hatalı olduğunda alert mesajı (hata mesajı) gönderir.
                 error: error => {
                     this.alertService.error(error);
                     this.loading = false;

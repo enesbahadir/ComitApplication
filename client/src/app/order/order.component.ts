@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
 
   }
 
+  // Kullanıcı rolüne göre order listesini görme kontrolü.
   ngOnInit(): void {
     if(this.user && this.user.role.includes("ADMIN")){
       this.orderService.getOrdersAll().subscribe(data =>{
@@ -27,6 +28,5 @@ export class OrderComponent implements OnInit {
         this.orders = data;
       });
     }
-    // this.cartList = this.orderService.findAll();
   }
 }

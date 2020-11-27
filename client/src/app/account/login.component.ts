@@ -20,22 +20,23 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+      // Login form alan kontrolü.
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
     }
 
-    // convenience getter for easy access to form fields
+    // Form alanlarındaki özellikleri alamak için kullanılır.
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        // reset alerts on submit
+        // Submit olduğunda uyaruları temizle.
         this.alertService.clear();
 
-        // stop here if form is invalid
+        // Form geçersiz olduğunda aynı yerde kal.
         if (this.form.invalid) {
             return;
         }
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                 this.alertService.success('Hoşgeldiniz '+this.f.username.value, { keepAfterRouteChange: true });
-                    // get return url from query parameters or default to home page
+                    // URL'yi sorgu parametrelerinden veya varsayılandan ana sayfaya döndür
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },

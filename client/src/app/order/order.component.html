@@ -1,6 +1,6 @@
 <h1 align="center" class="display-4 mb-5">Order</h1>
 
-<!--Cart Detail Table-->
+<!--Order Table Start-->
 <table class="table table-striped text-center">
   <thead>
   <tr>
@@ -18,8 +18,8 @@
     <tr>
       <td class="align-middle"><mat-list *ngFor="let product of order.products">
         <mat-list-item >
-          <div mat-line>{{product.name}}</div>
-          <di mat-line> {{product.description}} </di>
+          <div mat-line>{{product.product.name}}</div>
+          <di mat-line> {{product.product.description}} </di>
         </mat-list-item>
       </mat-list></td>
       <td class="align-middle">{{ order.user.username }}</td>
@@ -30,5 +30,6 @@
 
   </tbody>
 </table>
+<!--Order Table End-->
 
 

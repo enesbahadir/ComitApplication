@@ -13,6 +13,7 @@ const orderModule = () => import('./order/order.module').then(x => x.OrderModule
 
 
 const routes: Routes = [
+    // Kullsnıcı rolüne göre görüntülenecek sayfalar.
     { path: '', component: HomeComponent, canActivate: [AuthGuard]},
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule},
@@ -21,7 +22,7 @@ const routes: Routes = [
     { path: 'chart',loadChildren: chartModule, canActivate: [AuthGuard]},
     { path: 'order', loadChildren: orderModule,  canActivate: [AuthGuard]},
 
-    // otherwise redirect to home
+    // Tüm rollerv için görüntülenir.
     { path: '**', redirectTo: '' }
 ];
 
