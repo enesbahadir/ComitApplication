@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IProduct } from "../_models/product";
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import { observable, Observable, of } from 'rxjs';
 import { map } from "rxjs/operators";
 import { StaticVariables } from '../static-variables';
@@ -21,10 +21,13 @@ export class ProductService {
    addProduct(product : IProduct) : Observable<any>{
      return this.http.post(this.productsUrl, product);
    }
-    // Ürü güncelleme
-   updateProduct(id: number,product: IProduct) : Observable<any> {
-     const url = '${this.productsUrl}/${id}';
-     return this.http.put(url,product, this.httpOptions);
+
+    // Ürün güncelleme
+   updateProduct(id: number, product: IProduct) : Observable<any> {
+     return this.http.put<Product>('http://localhost:8080/api/products/'+id, product, {
+       observe:'response'
+     });
+
    }
     // Ürün silme
    deleteProduct(product: IProduct | number): Observable<IProduct> {
@@ -34,8 +37,11 @@ export class ProductService {
      return this.http.delete<IProduct>(url, this.httpOptions);
    }
    // Eklenmiş ürününü ürün Id'sine göre ürünü getirme.
-   getProduct(id : number):Observable<IProduct>{
-     return  this.http.get<IProduct>('${this.productsUrl}/${id}');
+   getProduct(id : number):Observable<HttpResponse<IProduct>>{
+     return  this.http.get<Product>('http://localhost:8080/api/products/'+id, {
+       observe:'response'
+     });
+
    }
   // Eklenmiş ürünlerin hepsini getirme.
    getProductAll(): Observable<any>{

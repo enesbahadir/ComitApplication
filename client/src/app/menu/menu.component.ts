@@ -28,12 +28,11 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
   if(this.user && this.user.role.includes("ADMIN"))
-      {
-        this.isAdmin = true;
-      }
+  {
+    this.isAdmin = true;
+  }
    this.getCartList();
    this.getTotalPrice();
-
   }
 
   logout() {
@@ -43,18 +42,16 @@ export class MenuComponent implements OnInit {
   deleteChartProduct(id: number) {
       this.cartService.deleteChartItem(id);
       this.getCartList();
-
   }
 
   // Menüdeki sepeteki ürünlerin hepsini silme
   deleteAll() {
-    console.log("first");
-    this.cartService.deleteAll();
+    this.cartService.clear();
     this.getCartList();
   }
 
-
 // Cart listesindeki ürünleri menüdeki sepette gösteririr.
+
   getCartList() {
     this.carts = this.cartService.findAll();
   }
@@ -63,9 +60,9 @@ export class MenuComponent implements OnInit {
     getTotalPrice() {
       let total = 0;
 
-      this.carts.map(item => {
-        total += item.price;
-      });
-      return total
-    }
+    this.carts.map(item => {
+      total += item.price;
+    });
+    return total
+  }
 }

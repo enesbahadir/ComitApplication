@@ -40,7 +40,7 @@ export class OrderService {
 
 // Kullanıcının kendi eklediği ürüneleri görme.
   getOrdersUser(id : number) {
-    return this.http.get<IOrder[]>('http://localhost:8080/api/orders/user/${id}');
+    return this.http.get<Order[]>('http://localhost:8080/api/orders/user/'+id);
   }
 
 
