@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_models/product';
+import { IProduct } from '../_models/product';
 import { ProductService } from './product.service';
 
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-  products: Product[];
+  products: IProduct[];
     loading = false;
 
   constructor(
@@ -15,13 +15,14 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.getProducts();
     }
-
+    // Listeye eklenen ürünlerin getirilmesi.
     getProducts(): void {
       this.productService.getProductAll().subscribe(data => {
         this.handleImage(data)
         });
   }
 
+  // Listedeki seçili ürünün silinmesi
     deleteProduct(id: number) {
     this.loading = true;
         this.productService.deleteProduct(id).subscribe(
@@ -33,6 +34,7 @@ export class ListComponent implements OnInit {
         this.getProducts();
     }
 
+  // Ürün resminin eklenmesi.
     handleImage(response)
     {
       for (const product of response)

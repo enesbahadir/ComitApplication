@@ -1,4 +1,6 @@
 <header>
+  <!-- Navbar menu start-->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="user">
     <img src="https://i.ibb.co/tLZZpJn/Screenshot-2-1.png" alt="Screenshot-2-1" border="0">
 
@@ -27,7 +29,7 @@
       <a class="nav-link" [matMenuTriggerFor]="menu" (onMenuOpen)="getCartList()">
         <mat-icon color="primary">shop</mat-icon>
       </a>
-
+<!-- Matmenu start-->
       <mat-menu #menu="matMenu">
         <div>Charts</div>
         <mat-divider></mat-divider>
@@ -65,6 +67,7 @@
         </div>
 
       </mat-menu>
+      <!-- Matmenu end-->
 
 
       <a class="nav-link" routerLink="account/login" routerLinkActive="active">
@@ -74,6 +77,6 @@
 
     </div>
   </nav>
-
+  <!-- Navbar menu end-->
 </header>
 

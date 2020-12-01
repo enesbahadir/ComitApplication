@@ -8,6 +8,7 @@
   }
 </style>
 <br>
+
 <main class="my-form">
   <div class="cotainer">
     <div class="row justify-content-center">
@@ -15,9 +16,8 @@
         <div class="card">
           <div class="card-header">Product</div>
           <div class="card-body">
+            <!--Form start-->
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-
 
               <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Name</label>
@@ -56,6 +56,7 @@
                 <a routerLink="/products" class="btn btn-link">Cancel</a>
               </div>
             </form>
+            <!--Form start-->
           </div>
         </div>
       </div>

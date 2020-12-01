@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../_models/product';
-import { ChartService } from './chart.service';
-import { OrderService } from '../order/order.service';
-import {Order} from "../_models/order";
+import {Component, OnInit} from '@angular/core';
+import {IProduct} from '../_models/product';
+import {ChartService} from './chart.service';
+import {OrderService} from '../order/order.service';
+import {IOrder} from "../_models/order";
 import {AccountService} from "../_services";
 
 @Component({
@@ -12,56 +12,49 @@ import {AccountService} from "../_services";
 })
 
 export class ChartComponent implements OnInit {
-  carts: Product[];
-
+  charts: IProduct[];
 
   constructor(
-    private chartService: ChartService,
-    private orderService: OrderService,
-    private accountService : AccountService
-  ) { }
+    private  chartService: ChartService, private orderService: OrderService,
+    private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
-    this.carts = this.chartService.findAll();
 
+    this.charts = this.chartService.findAll();
     this.getTotalPrice();
-
   }
 
-  // addChartToOrderList() {
-  //   this.orderService.addToOrder(this.carts);
-  //   this.carts = this.chartService.findAll();
-  // }
-
+  // Chart sayfasında olan ürünleri order listesine ekler.
   addChartToOrderList() {
-    const  order : Order = {
-      products:this.carts,
-      user:this.accountService.userValue,
-      date:new Date()
+    const order: IOrder = {
+      products: this.charts,
+      // products:this.charts,
+      user: this.accountService.userValue,
+      date: new Date()
     }
+
     this.orderService.addToOrder(order).subscribe();
-
-
-    this.carts = this.chartService.findAll();
+    // Chart Listesini yenileme
+    this.charts = this.chartService.findAll();
   }
 
-
+// Chart sayfasından ürün silmek için kullanılır.
   deleteChartProduct(id: number) {
     this.chartService.deleteChartItem(id);
-    // refresh the list
-    this.carts = this.chartService.findAll();
+
+    // Chart Listesini yenileme
+    this.charts = this.chartService.findAll();
   }
 
+  // Chart sayfasında ürünlerin toplam fiyatını gösteren metod
   getTotalPrice() {
     let total = 0;
 
-    this.carts.map(item => {
+    this.charts.map(item => {
       total += item.price;
     });
     return total
   }
-
-
-
 }
 

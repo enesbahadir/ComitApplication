@@ -1,8 +1,8 @@
-import { Product } from './product';
-import {User} from "./user";
+import { IProduct } from './product';
+import { IUser} from "./user";
 
-export interface Order {
-  products: Product[];
-  user : User;
+export interface IOrder {
+  products: IProduct[];
+  user : IUser;
   date?: Date;
 }
