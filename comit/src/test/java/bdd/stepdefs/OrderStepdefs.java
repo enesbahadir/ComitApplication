@@ -1,14 +1,19 @@
 package bdd.stepdefs;
 
+import bdd.SpringBootCucumberTest;
 import com.comit.model.*;
 import com.comit.payload.OrderForm;
 import com.comit.repository.OrderRepository;
+import com.comit.repository.RoleRepository;
 import com.comit.repository.UserRepository;
 import com.comit.service.ProductService;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -39,9 +44,13 @@ public class OrderStepdefs {
     @Autowired
     private UserRepository userRepository;
 
-    private final OrderForm orderFrom = new OrderForm();
+    @Autowired
+    private RoleRepository roleRepository;
+
+    private OrderForm orderFrom = new OrderForm();
     ResultActions action;
     long databaseSizeBeforeCreate;
+    int userId;
 
     public OrderStepdefs() {
     }
@@ -82,15 +91,16 @@ public class OrderStepdefs {
 
     @Given("comit app orders page")
     public void comitAppOrdersPage() throws Throwable {
+        orderFrom = new OrderForm();
         addMockUser();
         addMockProduct();
-        action = mvc.perform(MockMvcRequestBuilders
+/*        action = mvc.perform(MockMvcRequestBuilders
                 .post("/api/orders")
                 .content(ProductStepDefs.asJsonString(orderFrom))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());
-        action.andExpect(status().is(200));
+        action.andExpect(status().is(200));*/
     }
 
     @When("admin type user push orders, open orders page")
@@ -127,7 +137,7 @@ public class OrderStepdefs {
     @When("user type user push orders, open orders page")
     public void userTypeUserPushOrdersOpenOrdersPage() throws Throwable{
         action = mvc.perform(MockMvcRequestBuilders
-                .get("/api/orders/user/1")
+                .get("/api/orders/user/"+userId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());
@@ -160,18 +170,30 @@ public class OrderStepdefs {
     }
 
     public void addMockUser() {
-        User user = new User("enes","password","enes","enes",
-                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
-        user.setId(1);
-        userRepository.save(user);
-        orderFrom.setUser(user);
+        if (userRepository.existsByUsername("orderMockUser")) {
+            User user = userRepository.findByUsername("orderMockUser").orElseThrow();
+            orderFrom.setUser(user);
+            userId = user.getId();
+        } else {
+            Role userRole  = roleRepository.findByName(ERole.USER).orElseThrow();
+            User user = new User("orderMockUser","password","enes","enes",
+                    new HashSet<>(Collections.singletonList(userRole)));
+            userRepository.save(user);
+            orderFrom.setUser(user);
+        }
     }
 
     public void addMockUser2() {
-        User user = new User("bahadir","password","bahadir","bahadir",
-                new HashSet<>(Collections.singletonList(new Role(ERole.USER))));
-        user.setId(2);
-        userRepository.save(user);
+        if (userRepository.existsByUsername("orderMockUser2")) {
+            User user = userRepository.findByUsername("orderMockUser2").orElseThrow();
+            orderFrom.setUser(user);
+        } else {
+            Role userRole  = roleRepository.findByName(ERole.USER).orElseThrow();
+            User user = new User("orderMockUser2","password","enes","enes",
+                    new HashSet<>(Collections.singletonList(userRole)));
+            userRepository.save(user);
+            orderFrom.setUser(user);
+        }
     }
 
 

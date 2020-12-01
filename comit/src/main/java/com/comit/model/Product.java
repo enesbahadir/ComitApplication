@@ -2,6 +2,9 @@ package com.comit.model;
 
 import javax.persistence.*;
 
+/**
+ * Sistemde kayıtlı olan ürün'lerin bilgilerinin tutulduğu sınıf
+ */
 @Entity
 public class Product {
 

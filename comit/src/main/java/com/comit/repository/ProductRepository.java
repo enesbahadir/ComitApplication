@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
     Page<Product> findAll(Pageable pageable);
 
     @Query("SELECT p FROM Product p WHERE CONCAT(p.name, p.description, p.price) LIKE %?1%")

@@ -2,7 +2,32 @@ package com.comit.payload;
 
 import java.util.Set;
 
+/**
+ * Register işlemi için kullanıcının post etmesi gereken bilgilerin tutulduğu sınıftır.
+ */
 public class UserForm {
+
+    private String username;
+
+    private String password;
+
+    private String name;
+
+    private String surName;
+
+    private Set<String> role;
+
+    public UserForm() {
+    }
+
+    public UserForm(String username, String password, String name, String surName, Set<String> role) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surName = surName;
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -43,24 +68,4 @@ public class UserForm {
         this.role = role;
     }
 
-    public UserForm() {
-    }
-
-    public UserForm(String username, String password, String name, String surName, Set<String> role) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surName = surName;
-        this.role = role;
-    }
-
-    private String username;
-
-    private String password;
-
-    private String name;
-
-    private String surName;
-
-    private Set<String> role;
 }

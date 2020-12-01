@@ -1,3 +1,4 @@
+@txn
 Feature: Product CRUD Test Feature
 
   Scenario: Admin type user should add new prodcut

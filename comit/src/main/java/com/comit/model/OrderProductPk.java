@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
+/**
+ * Her bir order sınıfında tutulacak olan ürünlerle ilişkilerinin tutulduğu sınıftır.
+ */
 @Embeddable
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "order")
 public class OrderProductPk implements Serializable {

@@ -86,8 +86,9 @@ public class ProductStepDefs {
     public void userFillProductEditFormEditedProductIsPosted(DataTable dataTable) throws Throwable{
         List<String> data = dataTable.row(1);
         Product editedProduct = new Product(data.get(0), data.get(1), Long.valueOf(data.get(2)), null);
+
         action = mvc.perform(MockMvcRequestBuilders
-                .put("/api/products/2")
+                .put("/api/products/"+product.getId())
                 .content(asJsonString(editedProduct))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -112,7 +113,7 @@ public class ProductStepDefs {
     @When("user push delete button")
     public void userPushDeleteButton() throws Throwable{
         action = mvc.perform(MockMvcRequestBuilders
-                .delete("/api/products/2")
+                .delete("/api/products/"+product.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());
