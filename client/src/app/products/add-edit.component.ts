@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../_services';
 import { ProductService } from './product.service';
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Product } from "../_models/product";
+import { IProduct } from "../_models/product";
 import { User } from '../_models';
 import { AccountService } from '../_services';
 
@@ -16,7 +16,7 @@ export class AddEditComponent implements OnInit {
   isAddMode: boolean;
   loading = false;
   submitted = false;
-  product : Product;
+  product: IProduct;
 
   private selectedFile;
   imgURL: any;
@@ -44,6 +44,7 @@ export class AddEditComponent implements OnInit {
 
     _initializeForm() {
       this.form = this.formBuilder.group({
+        // Form kontrolü
         name: [null, Validators.required],
         description: [null, Validators.required],
         price: [0, Validators.required],
@@ -61,6 +62,7 @@ export class AddEditComponent implements OnInit {
       }
     }
 
+
   _setFormValue(res){
     this.form.patchValue({
       name: res.body.name,
@@ -70,19 +72,19 @@ export class AddEditComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
+  // Form alanalarındaki özellikleri kullanmak için kullanılan bir kolaylık.
   get f() {
     return this.form.controls;
   }
 
   onSubmit() {
     this.submitted = true;
-    // reset alerts on submit
     this.alertService.clear();
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
+    // Ürün resminin eklenmesi
+
     this.loading = true;
     if (this.isAddMode) {
       const uploadData = new FormData();
@@ -108,6 +110,7 @@ export class AddEditComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
+  // Güncellenen ürünün resminin güncellenmesi.
   onFileChange(event) {
     this.selectedFile = event.target.files[0];const reader = new FileReader();
 

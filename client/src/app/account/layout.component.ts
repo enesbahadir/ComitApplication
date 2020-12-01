@@ -9,7 +9,7 @@ export class LayoutComponent {
         private router: Router,
         private accountService: AccountService
     ) {
-        // redirect to home if already logged in
+        // Otorumu açtınız, anasayfaya yönlendiriliyorsunuz.
         if (this.accountService.userValue) {
             this.router.navigate(['/']);
         }

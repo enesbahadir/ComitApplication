@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../_models/product';
+import { IProduct } from '../_models/product';
 import {StaticVariables} from "../static-variables";
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  cartTotal: any  = 0;
-  products: Product[] = [];
-  cartList: Product[];
+  chartTotal = 0;
+  products: IProduct[] = [];
+  cartList: IProduct[];
 
   constructor() {
 }
-
-  addProduct(product: Product) {
+// Shoptan Menüdeki sepet listesine ürün ekleme.
+  addProduct(product: IProduct) {
     this.products.push(product);
   }
 
+  // Menü sepetinden seçilen ürünü silme.
   deleteChartProduct(id: number) {
     const index = this.products.findIndex(x => x.id === id);
     if (index !== -1) {
@@ -22,7 +23,7 @@ export class MenuService {
     }
   }
 
-  findAll(): Product[] {
+  findAll(): IProduct[] {
     return this.products.slice();
   }
 

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from "./order.service";
-import {Order} from "../_models/order";
+import {IOrder} from "../_models/order";
 import {AccountService} from "../_services";
-import {User} from "../_models";
+import {IUser} from "../_models";
 
 @Component({
   selector: 'app-order',
@@ -10,13 +10,14 @@ import {User} from "../_models";
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  orders: Order[];
-  user : User;
+  orders: IOrder[];
+  user : IUser;
   constructor(private orderService: OrderService, private accountService : AccountService) {
     this.user = this.accountService.userValue;
 
   }
 
+  // Kullanıcı rolüne göre order listesini görme kontrolü.
   ngOnInit(): void {
     if(this.user && this.user.role.includes("ADMIN")){
       this.orderService.getOrdersAll().subscribe(data =>{
@@ -27,6 +28,5 @@ export class OrderComponent implements OnInit {
         this.orders = data;
       });
     }
-    // this.cartList = this.orderService.findAll();
   }
 }
